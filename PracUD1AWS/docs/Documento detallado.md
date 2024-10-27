@@ -17,7 +17,7 @@
 
 ![alt text](image-2.png)
 
-### Accedemos al archivo de configuración para permitir conesiones remotas modificando la opción:
+### Accedemos al archivo de configuración para permitir conexiones remotas modificando la opción:
 
 **bind-address: 0.0.0.0**
 
