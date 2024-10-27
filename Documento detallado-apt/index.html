@@ -1,0 +1,970 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Edu">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../Documento%20detallado-docker/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
+    
+    
+      
+        <title>Práctica 2.1: MongoDB (apt) - Edu-mkdocs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6a10b989.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purle">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practica-21-mongodb-apt" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Edu-mkdocs" class="md-header__button md-logo" aria-label="Edu-mkdocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Edu-mkdocs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Práctica 2.1: MongoDB (apt)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purle"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Práctica 2.1: MongoDB (apt)
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Documento%20detallado-docker/" class="md-tabs__link">
+        
+  
+    
+  
+  Práctica 2.2: MongoDB (docker)
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Edu-mkdocs" class="md-nav__button md-logo" aria-label="Edu-mkdocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Edu-mkdocs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Práctica 2.1: MongoDB (apt)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.1: MongoDB (apt)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-configuracion-avanzada-de-mongodb" class="md-nav__link">
+    Instalación y Configuración Avanzada de MongoDB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuramos-la-primera-instancia-con-ubuntu-donde-lo-instalaremos-con-apt-install-mongodb" class="md-nav__link">
+    Configuramos la primera instancia con ubuntu donde lo instalaremos (con apt install) mongoDB
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuramos la primera instancia con ubuntu donde lo instalaremos (con apt install) mongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-mongodb-con-apt-en-ubuntu" class="md-nav__link">
+    Instalación de MongoDB con apt en Ubuntu
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de MongoDB con apt en Ubuntu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-actualizar-los-paquetes-e-importar-la-clave-publica" class="md-nav__link">
+    Paso 1: Actualizar los paquetes e importar la clave pública
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-importar-la-clave-gpg-de-mongodb" class="md-nav__link">
+    Paso 2: Importar la clave GPG de MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-creamos-el-archivo-de-lista-para-ubuntu-2404-noble" class="md-nav__link">
+    Paso 3: Creamos el archivo de lista para Ubuntu 24.04 (Noble)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-recargamos-la-bbdd-de-paquetes" class="md-nav__link">
+    Paso 4: Recargamos la BBDD de paquetes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-instalamos-la-ultima-version-estable" class="md-nav__link">
+    Paso 5: Instalamos la ultima versión estable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-iniciar-el-servicio-de-mongodb" class="md-nav__link">
+    Paso 6: Iniciar el servicio de MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-7-verificar-el-estado-del-servicio" class="md-nav__link">
+    Paso 7: Verificar el estado del servicio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-8-habilitar-mongodb-para-que-inicie-al-arrancar-el-sistema" class="md-nav__link">
+    Paso 8: Habilitar MongoDB para que inicie al arrancar el sistema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-9-verificar-la-conexion-a-mongodb" class="md-nav__link">
+    Paso 9: Verificar la conexión a MongoDB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-conectividad-de-red-en-mongodb-apt-para-permitir-conexiones-remotas" class="md-nav__link">
+    Configuración de la conectividad de red en MongoDB (apt) para permitir conexiones remotas
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de la conectividad de red en MongoDB (apt) para permitir conexiones remotas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editamos-el-archivo-de-configuracion-de-mongodb" class="md-nav__link">
+    Editamos el archivo de configuración de MongoDB
+  </a>
+  
+    <nav class="md-nav" aria-label="Editamos el archivo de configuración de MongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificamos-la-opcion-bindip" class="md-nav__link">
+    Modificamos la opción bindIp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reiniciamos-mongodb" class="md-nav__link">
+    Reiniciamos MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-el-firewall-opcional" class="md-nav__link">
+    Configurar el Firewall (Opcional)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificar-la-conectividad-remota" class="md-nav__link">
+    Verificar la conectividad remota
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-cuentas-de-usuario-y-permisos" class="md-nav__link">
+    Gestión de cuentas de usuario y permisos
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de cuentas de usuario y permisos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conectaremos-desde-otra-maquina-host-con-el-usuario-administrador-de-mongodb-apt" class="md-nav__link">
+    Conectaremos desde otra máquina (host) con el usuario administrador de MongoDB (apt)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-de-la-conectividad-entre-maquinas" class="md-nav__link">
+    Verificación de la conectividad entre máquinas
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Documento%20detallado-docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.2: MongoDB (docker)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-configuracion-avanzada-de-mongodb" class="md-nav__link">
+    Instalación y Configuración Avanzada de MongoDB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuramos-la-primera-instancia-con-ubuntu-donde-lo-instalaremos-con-apt-install-mongodb" class="md-nav__link">
+    Configuramos la primera instancia con ubuntu donde lo instalaremos (con apt install) mongoDB
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuramos la primera instancia con ubuntu donde lo instalaremos (con apt install) mongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-mongodb-con-apt-en-ubuntu" class="md-nav__link">
+    Instalación de MongoDB con apt en Ubuntu
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de MongoDB con apt en Ubuntu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-actualizar-los-paquetes-e-importar-la-clave-publica" class="md-nav__link">
+    Paso 1: Actualizar los paquetes e importar la clave pública
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-importar-la-clave-gpg-de-mongodb" class="md-nav__link">
+    Paso 2: Importar la clave GPG de MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-creamos-el-archivo-de-lista-para-ubuntu-2404-noble" class="md-nav__link">
+    Paso 3: Creamos el archivo de lista para Ubuntu 24.04 (Noble)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-recargamos-la-bbdd-de-paquetes" class="md-nav__link">
+    Paso 4: Recargamos la BBDD de paquetes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-instalamos-la-ultima-version-estable" class="md-nav__link">
+    Paso 5: Instalamos la ultima versión estable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-iniciar-el-servicio-de-mongodb" class="md-nav__link">
+    Paso 6: Iniciar el servicio de MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-7-verificar-el-estado-del-servicio" class="md-nav__link">
+    Paso 7: Verificar el estado del servicio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-8-habilitar-mongodb-para-que-inicie-al-arrancar-el-sistema" class="md-nav__link">
+    Paso 8: Habilitar MongoDB para que inicie al arrancar el sistema
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-9-verificar-la-conexion-a-mongodb" class="md-nav__link">
+    Paso 9: Verificar la conexión a MongoDB
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-conectividad-de-red-en-mongodb-apt-para-permitir-conexiones-remotas" class="md-nav__link">
+    Configuración de la conectividad de red en MongoDB (apt) para permitir conexiones remotas
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de la conectividad de red en MongoDB (apt) para permitir conexiones remotas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editamos-el-archivo-de-configuracion-de-mongodb" class="md-nav__link">
+    Editamos el archivo de configuración de MongoDB
+  </a>
+  
+    <nav class="md-nav" aria-label="Editamos el archivo de configuración de MongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificamos-la-opcion-bindip" class="md-nav__link">
+    Modificamos la opción bindIp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reiniciamos-mongodb" class="md-nav__link">
+    Reiniciamos MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-el-firewall-opcional" class="md-nav__link">
+    Configurar el Firewall (Opcional)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificar-la-conectividad-remota" class="md-nav__link">
+    Verificar la conectividad remota
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-cuentas-de-usuario-y-permisos" class="md-nav__link">
+    Gestión de cuentas de usuario y permisos
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de cuentas de usuario y permisos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conectaremos-desde-otra-maquina-host-con-el-usuario-administrador-de-mongodb-apt" class="md-nav__link">
+    Conectaremos desde otra máquina (host) con el usuario administrador de MongoDB (apt)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-de-la-conectividad-entre-maquinas" class="md-nav__link">
+    Verificación de la conectividad entre máquinas
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="practica-21-mongodb-apt">Práctica 2.1: MongoDB (apt)</h1>
+<h2 id="instalacion-y-configuracion-avanzada-de-mongodb">Instalación y Configuración Avanzada de MongoDB</h2>
+<h2 id="configuramos-la-primera-instancia-con-ubuntu-donde-lo-instalaremos-con-apt-install-mongodb">Configuramos la primera instancia con ubuntu donde lo instalaremos (con apt install) mongoDB</h2>
+<p><img alt="alt text" src="../image.png" />
+<img alt="alt text" src="../image-1.png" /></p>
+<p><strong>Verificamos la conectividad entre nuestro host y la MV AWS (apt):</strong></p>
+<p><code>ssh -i /ruta/a/clave .pem ubuntu@&lt;ip-pública&gt;</code></p>
+<p><img alt="alt text" src="../image-2.png" /></p>
+<p><strong>Análisis y selección del SGBD:</strong></p>
+<div style="text-align: justify">
+
+Versión más adecuada para mi entorno como estudiante es la MongoDB Community Edition, por las siguientes razones:
+
+- Es totalmente **gratuita y de código abierto,** lo que la hace ideal para estudiantes y proyectos académicos que no tienen recursos para pagar licencias.
+
+- Es muy **estable y recibe actualizaciones** y parches de seguridad de forma regular. Esto garantiza que los estudiantes utilicen una versión sólida y segura, perfecta para aprender sin sacrificar la funcionalidad.
+
+- Funciona en **múltiples sistemas operativos** (Windows, macOS y Linux), lo cual es útil para estudiantes que pueden estar trabajando con diferentes plataformas. La Community Edition también permite el uso de herramientas gratuitas como MongoDB Compass para la administración gráfica.
+
+- Proporciona las **funcionalidades** clave de MongoDB, como las consultas flexibles de JSON, el soporte para índices y la capacidad de replicación. Esto permite a los estudiantes aprender conceptos fundamentales de bases de datos NoSQL, como la esca-labilidad.
+
+</div>
+
+<h3 id="instalacion-de-mongodb-con-apt-en-ubuntu">Instalación de MongoDB con <code>apt</code> en Ubuntu</h3>
+<h4 id="paso-1-actualizar-los-paquetes-e-importar-la-clave-publica">Paso 1: Actualizar los paquetes e importar la clave pública</h4>
+<p><code>sudo apt update</code></p>
+<p><code>sudo apt-get install gnupg curl</code></p>
+<h4 id="paso-2-importar-la-clave-gpg-de-mongodb">Paso 2: Importar la clave GPG de MongoDB</h4>
+<p><code>curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+   --dearmor</code></p>
+<h4 id="paso-3-creamos-el-archivo-de-lista-para-ubuntu-2404-noble">Paso 3: Creamos el archivo de lista para Ubuntu 24.04 (Noble)</h4>
+<p><code>echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list</code></p>
+<h4 id="paso-4-recargamos-la-bbdd-de-paquetes">Paso 4: Recargamos la BBDD de paquetes</h4>
+<p><code>sudo apt-get update</code></p>
+<h4 id="paso-5-instalamos-la-ultima-version-estable">Paso 5: Instalamos la ultima versión estable</h4>
+<p><code>sudo apt-get install -y mongodb-org</code></p>
+<h4 id="paso-6-iniciar-el-servicio-de-mongodb">Paso 6: Iniciar el servicio de MongoDB</h4>
+<p><code>sudo systemctl start mongod</code></p>
+<p><strong>Si recibe un error similar al siguiente al iniciar</strong> <code>mongod</code></p>
+<p><em>Failed to start mongod.service: Unit mongod.service not found.</em></p>
+<p><strong>Primero ejecute el siguiente comando:</strong></p>
+<p><code>sudo systemctl daemon-reload</code></p>
+<p><strong>Luego ejecute nuevamente el comando de inicio anterior.</strong></p>
+<h4 id="paso-7-verificar-el-estado-del-servicio">Paso 7: Verificar el estado del servicio</h4>
+<p><code>sudo systemctl status mongod</code></p>
+<p><strong>Podemos parar MongoDB:</strong></p>
+<p><code>sudo systemctl stop mongod</code></p>
+<p><strong>Para reiniciar MongDB:</strong></p>
+<p><code>sudo systemctl restart mongod</code></p>
+<h4 id="paso-8-habilitar-mongodb-para-que-inicie-al-arrancar-el-sistema">Paso 8: Habilitar MongoDB para que inicie al arrancar el sistema</h4>
+<p><code>sudo systemctl enable mongod</code></p>
+<h4 id="paso-9-verificar-la-conexion-a-mongodb">Paso 9: Verificar la conexión a MongoDB</h4>
+<p>Para confirmar que MongoDB está funcionando correctamente, puedes ejecutar el cliente de MongoDB y ver si se conecta poder comenzar a utilizarlo:</p>
+<p><code>mongosh</code></p>
+<p><img alt="alt text" src="../image-3.png" /></p>
+<h2 id="configuracion-de-la-conectividad-de-red-en-mongodb-apt-para-permitir-conexiones-remotas">Configuración de la conectividad de red en MongoDB (apt) para permitir conexiones remotas</h2>
+<h3 id="editamos-el-archivo-de-configuracion-de-mongodb">Editamos el archivo de configuración de MongoDB</h3>
+<p><code>sudo nano /etc/mongod.conf</code></p>
+<h4 id="modificamos-la-opcion-bindip">Modificamos la opción <code>bindIp</code></h4>
+<ul>
+<li>Buscamos la línea que contiene <code>bindIp: 127.0.0.1</code> .Esta línea configura MongoDB para que solo escuche en la interfaz de localhost.</li>
+<li>Cambia el valor a <code>0.0.0.0</code> para permitir que MongoDB escuche en todas las interfaces de red:</li>
+</ul>
+<pre><code class="language-bash">net:
+  port: 27017
+  bindIp: 0.0.0.0
+</code></pre>
+<p><img alt="alt text" src="../image-14.png" /></p>
+<blockquote>
+<p><strong>Nota:</strong> <code>bindIp: 0.0.0.0</code> permite que MongoDB acepte conexiones desde cualquier IP.</p>
+</blockquote>
+<h4 id="reiniciamos-mongodb">Reiniciamos MongoDB</h4>
+<p><code>sudo systemctl restart mongod</code></p>
+<h4 id="configurar-el-firewall-opcional">Configurar el Firewall (Opcional)</h4>
+<p><strong>Si tenemos el firewall habilitado, permitiremos el acceso al puerto <code>27017</code> para conexiones remotas:</strong></p>
+<p><code>sudo ufw allow 27017</code></p>
+<p><img alt="alt text" src="../image-15.png" /></p>
+<h4 id="verificar-la-conectividad-remota">Verificar la conectividad remota</h4>
+<p><strong>Desde otra máquina intentaremos conectarnos al servidor de MongoDB usando 'mongosh' con la IP de la máquina donde MongoDB está instalado</strong></p>
+<p><code>mongosh --host &lt;IP del servidor&gt; --port 27017</code></p>
+<p>Si la conexión es correcta, MongoDB está configurado correctamente para conexiones remotas.</p>
+<p><strong>En nuestro host</strong></p>
+<ul>
+<li>Comprobaremos en nuestro firewall que tenemos el puerto 27017 habilitado</li>
+<li>Instalaremos mogosdb-mongosh</li>
+</ul>
+<p><img alt="alt text" src="../image-16.png" /></p>
+<h2 id="gestion-de-cuentas-de-usuario-y-permisos">Gestión de cuentas de usuario y permisos</h2>
+<p><strong>Creamos un usuario que tenga permiso para conectarse desde la otra máquina</strong></p>
+<p><code>mongosh</code></p>
+<p><code>test&gt; use admin</code></p>
+<pre><code class="language-j.son">db.createUser({
+  user: &quot;admin_user&quot;,
+  pwd: &quot;securePassword&quot;,
+  roles: [
+    { role: &quot;root&quot;, db: &quot;admin&quot; }
+  ]
+});
+</code></pre>
+<p><img alt="alt text" src="../image-17.png" /></p>
+<p>Y hay que tener en cuenta de tener de cambiar el valor a <code>0.0.0.0</code> para permitir que MongoDB escuche en todas las interfaces de red:</p>
+<p><img alt="alt text" src="../image-14.png" /></p>
+<h3 id="conectaremos-desde-otra-maquina-host-con-el-usuario-administrador-de-mongodb-apt">Conectaremos desde otra máquina (host) con el usuario administrador de MongoDB (apt)</h3>
+<p><code>mongosh --host &lt;IP_del_servidor&gt; --port 27017 -u "admin_user" -p "securePassword" --authenticationDatabase "admin"</code></p>
+<p><img alt="alt text" src="../image-18.png" /></p>
+<h2 id="verificacion-de-la-conectividad-entre-maquinas">Verificación de la conectividad entre máquinas</h2>
+<ul>
+<li><u>Nos conectamos desde la MV-AWS (apt) a la MV-AWS (docker)</u></li>
+</ul>
+<p>1.-<strong>Copiamos desde nuestro host el fichero .pem en la MV-AWS (apt) para poder conectarnos posteriormente a la MV-AWS (docker)</strong></p>
+<p><code>sudo scp -i &lt;/path/to/clave.pem&gt; &lt;/path/to/clave.pem&gt; ubuntu@&lt;IP del servidor&gt;:./</code></p>
+<p><img alt="alt text" src="../image-27.png" /></p>
+<p>2.-<strong>Nos conectamos desde la MV-AWS (apt) a la MV-AWS (docker) con el fichero .pem</strong></p>
+<p><code>sudo ssh -i &lt;clave.pem&gt; ubuntu@&lt;IP del servidor&gt;</code></p>
+<p><img alt="alt text" src="../image-28.png" /></p>
+<p>3.-<strong>Ejecutamos el contenedor en bash</strong></p>
+<p><code>sudo docker exec -it &lt;nombre-contenedor&gt; bash</code></p>
+<p><img alt="alt text" src="../image-29.png" /></p>
+<p>4.-<strong>Nos conectamos al usuario de la BBDD de mongoDB</strong></p>
+<p><code>mongosh -u &lt;user&gt; -p &lt;password&gt;</code></p>
+<p><img alt="alt text" src="../image-30.png" /></p>
+<ul>
+<li><u>Desde el host a la MV-AWS (docker)</u></li>
+</ul>
+<p>1.-<strong>Primero nos conectamos por ssh -i a la MV-AWS (docker)</strong></p>
+<p><code>sudo ssh -i &lt;clave.pem&gt; ubuntu@&lt;ip del servidor&gt;</code></p>
+<p><img alt="alt text" src="../image-24.png" /></p>
+<p>2.-<strong>Ejecutamos el contenedor en bash</strong></p>
+<p><code>sudo docker exec -it &lt;nombre-contenedor&gt; bash</code></p>
+<p><img alt="alt text" src="../image-25.png" /></p>
+<p>3.-<strong>Nos conectamos al usuario de la BBDD de mongoDB</strong></p>
+<p><code>mongosh -u &lt;user&gt; -p &lt;password&gt;</code></p>
+<p><img alt="alt text" src="../image-26.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      edu 2024
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "header.autohide"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+    
+  </body>
+</html>
