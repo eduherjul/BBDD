@@ -1,0 +1,916 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Edu">
+      
+      
+      
+        <link rel="prev" href="../Documento%20detallado-apt/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
+    
+    
+      
+        <title>Práctica 2.2: MongoDB (docker) - Edu-mkdocs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6a10b989.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purle">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practica-22-mongodb-docker" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Edu-mkdocs" class="md-header__button md-logo" aria-label="Edu-mkdocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Edu-mkdocs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Práctica 2.2: MongoDB (docker)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purle"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Documento%20detallado-apt/" class="md-tabs__link">
+        
+  
+    
+  
+  Práctica 2.1: MongoDB (apt)
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Práctica 2.2: MongoDB (docker)
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Edu-mkdocs" class="md-nav__button md-logo" aria-label="Edu-mkdocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Edu-mkdocs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Documento%20detallado-apt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.1: MongoDB (apt)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Práctica 2.2: MongoDB (docker)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.2: MongoDB (docker)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-configuracion-avanzada-de-mongodb" class="md-nav__link">
+    Instalación y Configuración Avanzada de MongoDB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuramos-la-primera-instancia-con-ubuntu-donde-lo-instalaremos-usando-docker" class="md-nav__link">
+    Configuramos la primera instancia con ubuntu donde lo instalaremos usando Docker
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuramos la primera instancia con ubuntu donde lo instalaremos usando Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-mongodb-usando-docker" class="md-nav__link">
+    Instalación de MongoDB usando Docker
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de MongoDB usando Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-actualizar-los-paquetes" class="md-nav__link">
+    Paso 1: Actualizar los paquetes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-instalamos-docker" class="md-nav__link">
+    Paso 2: Instalamos Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-descargamos-la-imagen-de-mongodb-desde-docker-hub" class="md-nav__link">
+    Paso 3: Descargamos la imagen de MongoDB desde Docker Hub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-creamos-y-ejecutamos-un-contenedor-con-mongodb" class="md-nav__link">
+    Paso 4: Creamos y ejecutamos un contenedor con MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-verificamos-que-el-contenedor-esta-en-ejecucion" class="md-nav__link">
+    Paso 5: Verificamos que el contenedor está en ejecución
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-acceder-al-cliente-de-mongodb-dentro-del-contenedor" class="md-nav__link">
+    Paso 6: Acceder al cliente de MongoDB dentro del contenedor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cambio-del-puerto-de-mongodb" class="md-nav__link">
+    Cambio del puerto de MongoDB
+  </a>
+  
+    <nav class="md-nav" aria-label="Cambio del puerto de MongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-detener-y-eliminar-el-contenedor-de-mongodb-actual-que-ya-esta-ejecutandose" class="md-nav__link">
+    Paso 1: Detener y eliminar el contenedor de MongoDB actual que ya está ejecutándose
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 1: Detener y eliminar el contenedor de MongoDB actual que ya está ejecutándose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-crear-un-nuevo-contenedor-con-el-puerto-cambiado" class="md-nav__link">
+    Paso 2: Crear un Nuevo Contenedor con el Puerto Cambiado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-verificamos-la-conexion-con-el-nuevo-puerto" class="md-nav__link">
+    Paso 3: Verificamos la conexión con el nuevo puerto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-conectividad-de-red-en-mongodb-docker-para-no-permitir-conexiones-remotas" class="md-nav__link">
+    Configuración de la conectividad de red en MongoDB (docker) para NO permitir conexiones remotas
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de la conectividad de red en MongoDB (docker) para NO permitir conexiones remotas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-iniciamos-el-contenedor-mongodb-sin-exponer-el-puerto-en-el-host" class="md-nav__link">
+    Paso 1: Iniciamos el contenedor MongoDB sin exponer el puerto en el host
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 1: Iniciamos el contenedor MongoDB sin exponer el puerto en el host">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejecutaremos-mongodb-en-docker-con-la-configuracion-de-localhost" class="md-nav__link">
+    Ejecutaremos MongoDB en Docker con la configuración de localhost
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-cuentas-de-usuario-y-permisos" class="md-nav__link">
+    Gestión de cuentas de usuario y permisos
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de cuentas de usuario y permisos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creamos-un-usuario-en-mongodb-docker-que-tenga-permiso-para-conectarse-desde-la-otra-maquina" class="md-nav__link">
+    Creamos un usuario en MongoDB (docker) que tenga permiso para conectarse desde la otra máquina
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-de-la-conectividad-entre-maquinas" class="md-nav__link">
+    Verificación de la conectividad entre máquinas
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-configuracion-avanzada-de-mongodb" class="md-nav__link">
+    Instalación y Configuración Avanzada de MongoDB
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuramos-la-primera-instancia-con-ubuntu-donde-lo-instalaremos-usando-docker" class="md-nav__link">
+    Configuramos la primera instancia con ubuntu donde lo instalaremos usando Docker
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuramos la primera instancia con ubuntu donde lo instalaremos usando Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-mongodb-usando-docker" class="md-nav__link">
+    Instalación de MongoDB usando Docker
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación de MongoDB usando Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-actualizar-los-paquetes" class="md-nav__link">
+    Paso 1: Actualizar los paquetes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-instalamos-docker" class="md-nav__link">
+    Paso 2: Instalamos Docker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-descargamos-la-imagen-de-mongodb-desde-docker-hub" class="md-nav__link">
+    Paso 3: Descargamos la imagen de MongoDB desde Docker Hub
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-creamos-y-ejecutamos-un-contenedor-con-mongodb" class="md-nav__link">
+    Paso 4: Creamos y ejecutamos un contenedor con MongoDB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-verificamos-que-el-contenedor-esta-en-ejecucion" class="md-nav__link">
+    Paso 5: Verificamos que el contenedor está en ejecución
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-6-acceder-al-cliente-de-mongodb-dentro-del-contenedor" class="md-nav__link">
+    Paso 6: Acceder al cliente de MongoDB dentro del contenedor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cambio-del-puerto-de-mongodb" class="md-nav__link">
+    Cambio del puerto de MongoDB
+  </a>
+  
+    <nav class="md-nav" aria-label="Cambio del puerto de MongoDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-detener-y-eliminar-el-contenedor-de-mongodb-actual-que-ya-esta-ejecutandose" class="md-nav__link">
+    Paso 1: Detener y eliminar el contenedor de MongoDB actual que ya está ejecutándose
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 1: Detener y eliminar el contenedor de MongoDB actual que ya está ejecutándose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-crear-un-nuevo-contenedor-con-el-puerto-cambiado" class="md-nav__link">
+    Paso 2: Crear un Nuevo Contenedor con el Puerto Cambiado
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-verificamos-la-conexion-con-el-nuevo-puerto" class="md-nav__link">
+    Paso 3: Verificamos la conexión con el nuevo puerto
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-la-conectividad-de-red-en-mongodb-docker-para-no-permitir-conexiones-remotas" class="md-nav__link">
+    Configuración de la conectividad de red en MongoDB (docker) para NO permitir conexiones remotas
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de la conectividad de red en MongoDB (docker) para NO permitir conexiones remotas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-iniciamos-el-contenedor-mongodb-sin-exponer-el-puerto-en-el-host" class="md-nav__link">
+    Paso 1: Iniciamos el contenedor MongoDB sin exponer el puerto en el host
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 1: Iniciamos el contenedor MongoDB sin exponer el puerto en el host">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejecutaremos-mongodb-en-docker-con-la-configuracion-de-localhost" class="md-nav__link">
+    Ejecutaremos MongoDB en Docker con la configuración de localhost
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestion-de-cuentas-de-usuario-y-permisos" class="md-nav__link">
+    Gestión de cuentas de usuario y permisos
+  </a>
+  
+    <nav class="md-nav" aria-label="Gestión de cuentas de usuario y permisos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creamos-un-usuario-en-mongodb-docker-que-tenga-permiso-para-conectarse-desde-la-otra-maquina" class="md-nav__link">
+    Creamos un usuario en MongoDB (docker) que tenga permiso para conectarse desde la otra máquina
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-de-la-conectividad-entre-maquinas" class="md-nav__link">
+    Verificación de la conectividad entre máquinas
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="practica-22-mongodb-docker">Práctica 2.2: MongoDB (docker)</h1>
+<h2 id="instalacion-y-configuracion-avanzada-de-mongodb">Instalación y Configuración Avanzada de MongoDB</h2>
+<h2 id="configuramos-la-primera-instancia-con-ubuntu-donde-lo-instalaremos-usando-docker">Configuramos la primera instancia con ubuntu donde lo instalaremos usando Docker</h2>
+<p><img alt="alt text" src="../image-4.png" />
+<img alt="alt text" src="../image-5.png" /></p>
+<p><strong>Verificamos la conectividad entre nuestro host y la MV (mongo-docker):</strong></p>
+<p><code>ssh -i /ruta/a/clave .pem (ejem:ubuntu)@ip-pública</code></p>
+<p><img alt="alt text" src="../image-6.png" /></p>
+<h3 id="instalacion-de-mongodb-usando-docker">Instalación de MongoDB usando <code>Docker</code></h3>
+<h4 id="paso-1-actualizar-los-paquetes">Paso 1: Actualizar los paquetes</h4>
+<p><code>sudo apt update</code></p>
+<h4 id="paso-2-instalamos-docker">Paso 2: Instalamos Docker</h4>
+<p><code>sudo apt install docker.io</code></p>
+<h4 id="paso-3-descargamos-la-imagen-de-mongodb-desde-docker-hub">Paso 3: Descargamos la imagen de MongoDB desde Docker Hub</h4>
+<p><code>sudo docker pull mongo</code></p>
+<h4 id="paso-4-creamos-y-ejecutamos-un-contenedor-con-mongodb">Paso 4: Creamos y ejecutamos un contenedor con MongoDB</h4>
+<p><code>sudo docker run --name nombre-contenedor -d -p 27017:27017 mongo</code></p>
+<p><strong>Este comando nos creará un contenedor en segundo plano con el nombre <code>nombre-contenedor</code>, asignado el puerto 27017 del host al contenedor</strong></p>
+<h4 id="paso-5-verificamos-que-el-contenedor-esta-en-ejecucion">Paso 5: Verificamos que el contenedor está en ejecución</h4>
+<p><code>docker ps</code></p>
+<p><img alt="alt text" src="../image-7.png" /></p>
+<h4 id="paso-6-acceder-al-cliente-de-mongodb-dentro-del-contenedor">Paso 6: Acceder al cliente de MongoDB dentro del contenedor</h4>
+<p><strong>Podemos abrir una terminal dentro del contenedor y veriricar que MongoDB funciona:</strong></p>
+<p><code>docker exec -it 'nombre-contenedor' mongosh</code></p>
+<p><img alt="alt text" src="../image-8.png" /></p>
+<p><strong>Si el cliente de MongoDB se abre y muestra la conexión correcta, significa que MongoDB se nos está ejecutando correctamente en el contenedor.</strong></p>
+<h2 id="cambio-del-puerto-de-mongodb">Cambio del puerto de MongoDB</h2>
+<h3 id="paso-1-detener-y-eliminar-el-contenedor-de-mongodb-actual-que-ya-esta-ejecutandose">Paso 1: Detener y eliminar el contenedor de MongoDB actual que ya está ejecutándose</h3>
+<p><code>docker stop 'nombre-contenedor'</code></p>
+<p><code>docker rm 'nombre-contenedor'</code></p>
+<p><img alt="alt text" src="../image-9.png" /></p>
+<h4 id="paso-2-crear-un-nuevo-contenedor-con-el-puerto-cambiado">Paso 2: Crear un Nuevo Contenedor con el Puerto Cambiado</h4>
+<p><strong>Vamos a crear un nuevo contenedor y especificar un puerto diferente al predeterminado (por ejemplo, usaremos el puerto <code>28000</code>).</strong></p>
+<p><code>docker run -d --name 'nombre-contenedor' -p 28000:27017 mongo</code></p>
+<p>Aquí hemos indicado que el puerto <strong>28000</strong> de la máquina anfitriona esté asociado al puerto interno <strong>27017</strong> del contenedor, el cual es el puerto que MongoDB usa por defecto dentro del contenedor. MongoDB seguirá escuchando en <strong>27017</strong> dentro del contenedor, pero externamente accederemos mediante <strong>28000</strong>.</p>
+<p><img alt="alt text" src="../image-10.png" /></p>
+<h4 id="paso-3-verificamos-la-conexion-con-el-nuevo-puerto">Paso 3: Verificamos la conexión con el nuevo puerto</h4>
+<p><code>mongosh --port 28000</code></p>
+<p><img alt="alt text" src="../image-11.png" /></p>
+<h2 id="configuracion-de-la-conectividad-de-red-en-mongodb-docker-para-no-permitir-conexiones-remotas">Configuración de la conectividad de red en MongoDB (docker) para NO permitir conexiones remotas</h2>
+<h3 id="paso-1-iniciamos-el-contenedor-mongodb-sin-exponer-el-puerto-en-el-host">Paso 1: Iniciamos el contenedor MongoDB sin exponer el puerto en el host</h3>
+<p><strong>Ejecuta MongoDB en Docker sin especificar el mapeo del puerto (evitando -p 27017:27017):</strong></p>
+<p><code>docker run -d --name 'nombre-contenedor' mongo</code></p>
+<p>Esto hará que MongoDB esté disponible solo dentro del contenedor y no sea accesible desde otras máquinas</p>
+<p><strong>Verificamos el estado del contenedor para confirmar que está en ejeución, pero sin puertos espuestos</strong></p>
+<p><img alt="alt text" src="../image-13.png" /></p>
+<p>En la columna <code>PORTS</code>, deberemos ver que no se muestra ningún puerto para <code>otro-contenedor</code>, indicando que no hay acceso al puerto <code>27017</code> desde el exterior del contenedor</p>
+<p>Para configurar MongoDB en Docker y no permitir conexiones remotas, debemos ajustar la configuración de MongoDB para que escuche solo en la interfaz localhost (127.0.0.1). Esto garantiza que MongoDB acepte conexiones únicamente desde la misma máquina anfitriona o desde el propio contenedor.</p>
+<h4 id="ejecutaremos-mongodb-en-docker-con-la-configuracion-de-localhost">Ejecutaremos MongoDB en Docker con la configuración de localhost</h4>
+<p>Con la imagen que tenemos de MongoDB de Docker, crearemos un contenedor que use el archivo de configuración mongod.conf o directamente especificar la IP de 127.0.0.1.</p>
+<p><strong>Especificaremos bindIp directamente en el comando de inicio</strong></p>
+<p><code>docker run -d --name &lt;nombre-contenedor&gt; -p 127.0.0.1:27017 mongo --bind_ip 127.0.0.1</code></p>
+<p><strong>Usaremos un firewall (ufW) para bloquear el acceso externo</strong></p>
+<ul>
+<li>
+<p>Habilitamos el firewall
+    <code>sudo ufw enable</code></p>
+</li>
+<li>
+<p>Bloqueamos cualquier acceso externo al puerto 27017
+    <code>sudo ufw deny 27017</code></p>
+</li>
+<li>
+<p>Confirmamos que las reglas se han aplicado correctamente
+    <code>sudo ufw status</code></p>
+</li>
+</ul>
+<p><img alt="alt text" src="../image-19.png" /></p>
+<p><strong>Verificamos que MongoDB no sea accesible externamente</strong></p>
+<p><img alt="alt text" src="../image-12.png" /></p>
+<p><strong>NO PODEMOS ACCEDER</strong></p>
+<h2 id="gestion-de-cuentas-de-usuario-y-permisos">Gestión de cuentas de usuario y permisos</h2>
+<h4 id="creamos-un-usuario-en-mongodb-docker-que-tenga-permiso-para-conectarse-desde-la-otra-maquina">Creamos un usuario en MongoDB (docker) que tenga permiso para conectarse desde la otra máquina</h4>
+<p><code>docker exec -it &lt;nombre-contenedor mongosh</code></p>
+<p><code>test&gt; use admin</code></p>
+<p><code>db.createUser({user: "admin_user", pwd: "securePassword", roles: [ { role: "root", db: "admin" } ]});</code></p>
+<p><img alt="alt text" src="../image-20.png" /></p>
+<h2 id="verificacion-de-la-conectividad-entre-maquinas">Verificación de la conectividad entre máquinas</h2>
+<ul>
+<li>Nos conectamos desde la MV-AWS (docker) a la MV-AWS (apt)</li>
+</ul>
+<p><img alt="alt text" src="../image-22.png" /></p>
+<ul>
+<li>Desde el HOST a la MV-AWS (apt)</li>
+</ul>
+<p><img alt="alt text" src="../image-23.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      edu 2024
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "header.autohide"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+    
+  </body>
+</html>
