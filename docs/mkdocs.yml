@@ -30,7 +30,7 @@ theme:
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
-mardown_extensions:
+markdown_extensions:
   - codehilite:
       guess_lang: false
       linemus: true
@@ -41,5 +41,6 @@ mardown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - attr_list
+docs_dir: docs
 
 copyright: edu 2024

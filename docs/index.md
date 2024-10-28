@@ -7,7 +7,7 @@
 
 nav:
 
-## Descripción
+## Description
 
 * Práctica   1: Documento AWS (ubuntu-mysql-apt-docker)
 * Práctica 2.1: MongoDB   AWS (apt)
