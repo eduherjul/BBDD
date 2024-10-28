@@ -17,13 +17,10 @@
 
 Versión más adecuada para mi entorno como estudiante es la MongoDB Community Edition, por las siguientes razones:
 
-- Es totalmente **gratuita y de código abierto,** lo que la hace ideal para estudiantes y proyectos académicos que no tienen recursos para pagar licencias.
-
-- Es muy **estable y recibe actualizaciones** y parches de seguridad de forma regular. Esto garantiza que los estudiantes utilicen una versión sólida y segura, perfecta para aprender sin sacrificar la funcionalidad.
-
-- Funciona en **múltiples sistemas operativos** (Windows, macOS y Linux), lo cual es útil para estudiantes que pueden estar trabajando con diferentes plataformas. La Community Edition también permite el uso de herramientas gratuitas como MongoDB Compass para la administración gráfica.
-
-- Proporciona las **funcionalidades** clave de MongoDB, como las consultas flexibles de JSON, el soporte para índices y la capacidad de replicación. Esto permite a los estudiantes aprender conceptos fundamentales de bases de datos NoSQL, como la esca-labilidad.
+- Es totalmente **gratuita y de código abierto,** lo que la hace ideal para estudiantes y proyectos académicos que no tienen recursos para pagar licencias.<br>
+- Es muy **estable y recibe actualizaciones** y parches de seguridad de forma regular. Esto garantiza que los estudiantes utilicen una versión sólida y segura, perfecta para aprender sin sacrificar la funcionalidad.<br>
+- Funciona en **múltiples sistemas operativos** (Windows, macOS y Linux), lo cual es útil para estudiantes que pueden estar trabajando con diferentes plataformas. La Community Edition también permite el uso de herramientas gratuitas como MongoDB Compass para la administración gráfica.<br>
+- Proporciona las **funcionalidades** clave de MongoDB, como las consultas flexibles de JSON, el soporte para índices y la capacidad de replicación. Esto permite a los estudiantes aprender conceptos fundamentales de bases de datos NoSQL, como la esca-labilidad.<br>
 
 ### Instalación de MongoDB con `apt` en Ubuntu
 
