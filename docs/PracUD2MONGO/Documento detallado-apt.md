@@ -15,8 +15,6 @@
 
 **Análisis y selección del SGBD:**
 
-<div style="text-align: justify">
-
 Versión más adecuada para mi entorno como estudiante es la MongoDB Community Edition, por las siguientes razones:
 
 - Es totalmente **gratuita y de código abierto,** lo que la hace ideal para estudiantes y proyectos académicos que no tienen recursos para pagar licencias.
@@ -26,8 +24,6 @@ Versión más adecuada para mi entorno como estudiante es la MongoDB Community E
 - Funciona en **múltiples sistemas operativos** (Windows, macOS y Linux), lo cual es útil para estudiantes que pueden estar trabajando con diferentes plataformas. La Community Edition también permite el uso de herramientas gratuitas como MongoDB Compass para la administración gráfica.
 
 - Proporciona las **funcionalidades** clave de MongoDB, como las consultas flexibles de JSON, el soporte para índices y la capacidad de replicación. Esto permite a los estudiantes aprender conceptos fundamentales de bases de datos NoSQL, como la esca-labilidad.
-
-</div>
 
 ### Instalación de MongoDB con `apt` en Ubuntu
 
