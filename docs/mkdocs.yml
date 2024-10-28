@@ -1,6 +1,6 @@
 site_author: Edu
 site_name: Edu-mkdocs
-description: Práctica 1-2
+descripción: Práctica 1-2
 nav:
   - Inicio: index.md
   - PracUD1AWS:
@@ -9,6 +9,8 @@ nav:
     - Detalle apt-docker: 
       - PracUD2MONGO/Documento detallado-apt.md
       - PracUD2MONGO/Documento detallado-docker.md
+docs_dir: /home/edu/Documentos/TODO FP/Informática (FP) CFGS 2ºASIX-BIS/ASGBD-sebas/Repositorio-ASGDB/BBDD/docs
+site_dir:../site
 theme:
   name: material
   language: es
@@ -34,16 +36,21 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode
 markdown_extensions:
-  - codehilite:
-      guess_lang: false
-      line_numbers: true
-
-  - pymdownx.highlight:
-      anchor_linemus: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
   - pymdownx.superfences
-  - attr_list
-docs_dir: docs
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
 copyright: edu 2024
