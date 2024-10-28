@@ -1,11 +1,14 @@
 site_author: Edu
 site_name: Edu-mkdocs
-site-description: Práctica 1-2
+description: Práctica 1-2
 nav:
   - Inicio: index.md
-  - Documento detallado.md
-  - Documento detallado-apt.md
-  - Documento detallado-docker.md
+  - PracUD1AWS:
+    - Detalle: PracUD1AWS/Documento detallado.md
+  - PracUD2MONGO:
+    - Detalle apt-docker: 
+      - PracUD2MONGO/Documento detallado-apt.md
+      - PracUD2MONGO/Documento detallado-docker.md
 theme:
   name: material
   language: es
@@ -18,9 +21,9 @@ theme:
     - header.autohide
   palette:
     - media: "(prefers-color-scheme: light)"
-      sheme: default
+      scheme: default
       primary: orange
-      accent: purle
+      accent: purple
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
@@ -33,7 +36,7 @@ theme:
 markdown_extensions:
   - codehilite:
       guess_lang: false
-      linemus: true
+      line_numbers: true
 
   - pymdownx.highlight:
       anchor_linemus: true
