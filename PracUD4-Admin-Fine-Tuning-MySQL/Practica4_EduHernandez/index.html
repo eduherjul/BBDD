@@ -1,0 +1,1450 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Edu">
+      
+      
+      
+        <link rel="prev" href="../../PracUD2MONGO/Documento%20detallado-docker/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.5">
+    
+    
+      
+        <title>PracUD4-Admin-Fine-Tuning-MySQL - Edu-mkdocs-Práctica 1-2 ASGBD</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6a10b989.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practica-4-administracion-y-fine-tuning-del-servidor-mysql" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Edu-mkdocs-Práctica 1-2 ASGBD" class="md-header__button md-logo" aria-label="Edu-mkdocs-Práctica 1-2 ASGBD" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Edu-mkdocs-Práctica 1-2 ASGBD
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PracUD4-Admin-Fine-Tuning-MySQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../PracUD1AWS/Documento%20detallado/" class="md-tabs__link">
+          
+  
+    
+  
+  PracUD1AWS
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../PracUD2MONGO/Documento%20detallado-apt/" class="md-tabs__link">
+          
+  
+    
+  
+  PracUD2MONGO
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  PracUD4-Admin-Fine-Tuning-MySQL
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Edu-mkdocs-Práctica 1-2 ASGBD" class="md-nav__button md-logo" aria-label="Edu-mkdocs-Práctica 1-2 ASGBD" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Edu-mkdocs-Práctica 1-2 ASGBD
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    PracUD1AWS
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            PracUD1AWS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PracUD1AWS/Documento%20detallado/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Detalle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    PracUD2MONGO
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            PracUD2MONGO
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Detalle apt-docker
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Detalle apt-docker
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PracUD2MONGO/Documento%20detallado-apt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.1: MongoDB (apt)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PracUD2MONGO/Documento%20detallado-docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.2: MongoDB (docker)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PracUD4-Admin-Fine-Tuning-MySQL
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    PracUD4-Admin-Fine-Tuning-MySQL
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-configuracion-inicial" class="md-nav__link">
+    1 - Configuración inicial
+  </a>
+  
+    <nav class="md-nav" aria-label="1 - Configuración inicial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12-configuramos-la-conectividad-en-red" class="md-nav__link">
+    1.2 - Configuramos la conectividad en red
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-configuramos-una-regla-de-seguridad-para-permitir-el-trafico-en-el-puerto-3306-mysql" class="md-nav__link">
+    1.3.- Configuramos una regla de seguridad para permitir el tráfico en el puerto 3306 (MySQL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-establecemos-la-contrasena-inicial-para-root" class="md-nav__link">
+    1.4 - Establecemos la contraseña inicial para root
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-creamos-un-nuevo-usuario-con-acceso-desde-cualquier-ip-y-le-otorgarmos-permisos" class="md-nav__link">
+    1.5 - Creamos un nuevo usuario con acceso desde cualquier IP y le otorgarmos permisos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-verificamos-la-conectividad-remota" class="md-nav__link">
+    1.6 - Verificamos la conectividad remota
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-aseguramos-las-cuentas-de-administracion" class="md-nav__link">
+    1.7 - Aseguramos las cuentas de administración
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modificamos-la-configuracion-del-servidor" class="md-nav__link">
+    2 - Modificamos la configuración del servidor
+  </a>
+  
+    <nav class="md-nav" aria-label="2 - Modificamos la configuración del servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-verificamos-la-memoria-total-disponible-en-el-servidor" class="md-nav__link">
+    2.1 - Verificamos la memoria total disponible en el servidor
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 - Verificamos la memoria total disponible en el servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guardamos-los-cambios-y-reiniciamos-mysql" class="md-nav__link">
+    Guardamos los cambios y reiniciamos MySQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-verificamos-los-cambios" class="md-nav__link">
+    2.2 - Verificamos los cambios
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-activacion-y-configuracion-de-los-registros" class="md-nav__link">
+    3 - Activación y configuración de los registros
+  </a>
+  
+    <nav class="md-nav" aria-label="3 - Activación y configuración de los registros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-activamos-el-registro-de-consultas-lentas" class="md-nav__link">
+    3.1 - Activamos el registro de consultas lentas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-activamos-el-registro-de-consultas-lentas" class="md-nav__link">
+    3.2 - Activamos el registro de consultas lentas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-establecemos-un-umbral-de-tiempo-de-2-segundos-para-considerar-una-consulta-como-lenta" class="md-nav__link">
+    3.3 - Establecemos un umbral de tiempo de 2 segundos para considerar una consulta como lenta
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 - Establecemos un umbral de tiempo de 2 segundos para considerar una consulta como lenta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#previamente-editamos-este-fichero-para-establecer-el-valor-persistente-a-2-segundos" class="md-nav__link">
+    Previamente editamos este fichero para establecer el valor persistente a 2 segundos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ya-en-mysql" class="md-nav__link">
+    Ya en mysql
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-activamos-el-registro-general-y-definimos-la-ruta-del-archivo-de-registro" class="md-nav__link">
+    3.4 - Activamos el registro general y definimos la ruta del archivo de registro
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-verificamos" class="md-nav__link">
+    3.5 - Verificamos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-documentamos-como-activar-y-desactivar-estos-registros-en-caliente" class="md-nav__link">
+    3.5 - Documentamos cómo activar y desactivar estos registros en caliente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-gestion-de-las-conexiones-y-de-los-hilos" class="md-nav__link">
+    4 - Gestión de las conexiones y de los hilos
+  </a>
+  
+    <nav class="md-nav" aria-label="4 - Gestión de las conexiones y de los hilos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-ajustamos-el-numero-maximo-de-conexiones-concurrentes-para-garantizar-un-rendimiento-optimo" class="md-nav__link">
+    4.1 - Ajustamos el número máximo de conexiones concurrentes para garantizar un rendimiento óptimo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-configuramos-el-tiempo-de-espera-de-las-conexiones-para-evitar-saturaciones-del-sistema" class="md-nav__link">
+    4.2 - Configuramos el tiempo de espera de las conexiones para evitar saturaciones del sistema
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 - Configuramos el tiempo de espera de las conexiones para evitar saturaciones del sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-de-manera-temporal" class="md-nav__link">
+    En caliente, de manera temporal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permanentemente" class="md-nav__link">
+    Permanentemente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-gestionamos-el-numero-de-hilos-disponibles-para-garantizar-una-correcta-concurrencia" class="md-nav__link">
+    4.3 - Gestionamos el número de hilos disponibles para garantizar una correcta concurrencia
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 - Gestionamos el número de hilos disponibles para garantizar una correcta concurrencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-temporalmente" class="md-nav__link">
+    En caliente, temporalmente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-manera-constante" class="md-nav__link">
+    De manera constante
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-momentaneamente" class="md-nav__link">
+    En caliente, momentáneamente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-manera-fija" class="md-nav__link">
+    De manera fija
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-configuracion-de-la-memoria-cache" class="md-nav__link">
+    5 - Configuración de la memoria caché
+  </a>
+  
+    <nav class="md-nav" aria-label="5 - Configuración de la memoria caché">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-configura-la-memoria-cache-de-tablas-y-consultas-para-mejorar-la-eficiencia-de-las-operaciones" class="md-nav__link">
+    5.1 - Configura la memoria caché de tablas y consultas para mejorar la eficiencia de las operaciones
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 - Configura la memoria caché de tablas y consultas para mejorar la eficiencia de las operaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-de-momento" class="md-nav__link">
+    En caliente, de momento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-manera-estable" class="md-nav__link">
+    De manera estable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-configuracion-inicial" class="md-nav__link">
+    1 - Configuración inicial
+  </a>
+  
+    <nav class="md-nav" aria-label="1 - Configuración inicial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12-configuramos-la-conectividad-en-red" class="md-nav__link">
+    1.2 - Configuramos la conectividad en red
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-configuramos-una-regla-de-seguridad-para-permitir-el-trafico-en-el-puerto-3306-mysql" class="md-nav__link">
+    1.3.- Configuramos una regla de seguridad para permitir el tráfico en el puerto 3306 (MySQL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-establecemos-la-contrasena-inicial-para-root" class="md-nav__link">
+    1.4 - Establecemos la contraseña inicial para root
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-creamos-un-nuevo-usuario-con-acceso-desde-cualquier-ip-y-le-otorgarmos-permisos" class="md-nav__link">
+    1.5 - Creamos un nuevo usuario con acceso desde cualquier IP y le otorgarmos permisos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-verificamos-la-conectividad-remota" class="md-nav__link">
+    1.6 - Verificamos la conectividad remota
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-aseguramos-las-cuentas-de-administracion" class="md-nav__link">
+    1.7 - Aseguramos las cuentas de administración
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modificamos-la-configuracion-del-servidor" class="md-nav__link">
+    2 - Modificamos la configuración del servidor
+  </a>
+  
+    <nav class="md-nav" aria-label="2 - Modificamos la configuración del servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-verificamos-la-memoria-total-disponible-en-el-servidor" class="md-nav__link">
+    2.1 - Verificamos la memoria total disponible en el servidor
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 - Verificamos la memoria total disponible en el servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guardamos-los-cambios-y-reiniciamos-mysql" class="md-nav__link">
+    Guardamos los cambios y reiniciamos MySQL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-verificamos-los-cambios" class="md-nav__link">
+    2.2 - Verificamos los cambios
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-activacion-y-configuracion-de-los-registros" class="md-nav__link">
+    3 - Activación y configuración de los registros
+  </a>
+  
+    <nav class="md-nav" aria-label="3 - Activación y configuración de los registros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-activamos-el-registro-de-consultas-lentas" class="md-nav__link">
+    3.1 - Activamos el registro de consultas lentas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-activamos-el-registro-de-consultas-lentas" class="md-nav__link">
+    3.2 - Activamos el registro de consultas lentas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-establecemos-un-umbral-de-tiempo-de-2-segundos-para-considerar-una-consulta-como-lenta" class="md-nav__link">
+    3.3 - Establecemos un umbral de tiempo de 2 segundos para considerar una consulta como lenta
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 - Establecemos un umbral de tiempo de 2 segundos para considerar una consulta como lenta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#previamente-editamos-este-fichero-para-establecer-el-valor-persistente-a-2-segundos" class="md-nav__link">
+    Previamente editamos este fichero para establecer el valor persistente a 2 segundos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ya-en-mysql" class="md-nav__link">
+    Ya en mysql
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-activamos-el-registro-general-y-definimos-la-ruta-del-archivo-de-registro" class="md-nav__link">
+    3.4 - Activamos el registro general y definimos la ruta del archivo de registro
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-verificamos" class="md-nav__link">
+    3.5 - Verificamos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-documentamos-como-activar-y-desactivar-estos-registros-en-caliente" class="md-nav__link">
+    3.5 - Documentamos cómo activar y desactivar estos registros en caliente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-gestion-de-las-conexiones-y-de-los-hilos" class="md-nav__link">
+    4 - Gestión de las conexiones y de los hilos
+  </a>
+  
+    <nav class="md-nav" aria-label="4 - Gestión de las conexiones y de los hilos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-ajustamos-el-numero-maximo-de-conexiones-concurrentes-para-garantizar-un-rendimiento-optimo" class="md-nav__link">
+    4.1 - Ajustamos el número máximo de conexiones concurrentes para garantizar un rendimiento óptimo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-configuramos-el-tiempo-de-espera-de-las-conexiones-para-evitar-saturaciones-del-sistema" class="md-nav__link">
+    4.2 - Configuramos el tiempo de espera de las conexiones para evitar saturaciones del sistema
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 - Configuramos el tiempo de espera de las conexiones para evitar saturaciones del sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-de-manera-temporal" class="md-nav__link">
+    En caliente, de manera temporal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#permanentemente" class="md-nav__link">
+    Permanentemente
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-gestionamos-el-numero-de-hilos-disponibles-para-garantizar-una-correcta-concurrencia" class="md-nav__link">
+    4.3 - Gestionamos el número de hilos disponibles para garantizar una correcta concurrencia
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 - Gestionamos el número de hilos disponibles para garantizar una correcta concurrencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-temporalmente" class="md-nav__link">
+    En caliente, temporalmente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-manera-constante" class="md-nav__link">
+    De manera constante
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-momentaneamente" class="md-nav__link">
+    En caliente, momentáneamente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-manera-fija" class="md-nav__link">
+    De manera fija
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-configuracion-de-la-memoria-cache" class="md-nav__link">
+    5 - Configuración de la memoria caché
+  </a>
+  
+    <nav class="md-nav" aria-label="5 - Configuración de la memoria caché">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-configura-la-memoria-cache-de-tablas-y-consultas-para-mejorar-la-eficiencia-de-las-operaciones" class="md-nav__link">
+    5.1 - Configura la memoria caché de tablas y consultas para mejorar la eficiencia de las operaciones
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 - Configura la memoria caché de tablas y consultas para mejorar la eficiencia de las operaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-caliente-de-momento" class="md-nav__link">
+    En caliente, de momento
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#de-manera-estable" class="md-nav__link">
+    De manera estable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="practica-4-administracion-y-fine-tuning-del-servidor-mysql">Práctica 4: Administración y Fine-Tuning del Servidor MySQL</h1>
+<h2 id="1-configuracion-inicial">1 - Configuración inicial</h2>
+<p><code>sudo apt update</code></p>
+<p><code>sudo apt install mysql-server -y</code></p>
+<p><code>sudo systemctl status mysql</code></p>
+<p><img alt="alt text" src="../image.png" /></p>
+<p>Habilitamos MySQL para que se inicie automáticamente al arrancar el sistema:</p>
+<p><code>sudo systemctl enable mysql</code></p>
+<h3 id="12-configuramos-la-conectividad-en-red">1.2 - Configuramos la conectividad en red</h3>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p><img alt="alt text" src="../image-1.png" /></p>
+<p>Esto nos permite que MySQL acepte conexiones desde cualquier dirección IP.
+Guardamos y reiniciamos mysql</p>
+<p><code>sudo systemctl restart mysql</code></p>
+<h3 id="13-configuramos-una-regla-de-seguridad-para-permitir-el-trafico-en-el-puerto-3306-mysql">1.3.- Configuramos una regla de seguridad para permitir el tráfico en el puerto 3306 (MySQL)</h3>
+<p><img alt="alt text" src="../image-2.png" /></p>
+<h3 id="14-establecemos-la-contrasena-inicial-para-root">1.4 - Establecemos la contraseña inicial para root</h3>
+<p><code>sudo mysql -u root</code></p>
+<p><code>alter user 'root'@'localhost' identified with mysql_native_password BY 'contraseña';</code></p>
+<p><code>flush privileges;</code></p>
+<p><code>exit</code></p>
+<h3 id="15-creamos-un-nuevo-usuario-con-acceso-desde-cualquier-ip-y-le-otorgarmos-permisos">1.5 - Creamos un nuevo usuario con acceso desde cualquier IP y le otorgarmos permisos</h3>
+<p><code>mysql -u root -p</code></p>
+<p><code>create user 'nuevo_usuario'@'%' identified by 'contraseña';</code></p>
+<p><code>grant all privileges on *.* TO 'nuevo_usuario'@'%';</code></p>
+<p><code>flush privileges;</code></p>
+<p><code>exit</code></p>
+<h3 id="16-verificamos-la-conectividad-remota">1.6 - Verificamos la conectividad remota</h3>
+<p>Probaremos la conexión desde otra máquina usando el cliente MySQL creado:</p>
+<p><code>mysql -u nuevo_usuario -p -h &lt;ip-del-servidor&gt; -P 3306</code></p>
+<p><img alt="alt text" src="../image-3.png" /></p>
+<h3 id="17-aseguramos-las-cuentas-de-administracion">1.7 - Aseguramos las cuentas de administración</h3>
+<p><code>sudo mysql_secure_installation</code></p>
+<p><img alt="alt text" src="../image-4.png" /></p>
+<h2 id="2-modificamos-la-configuracion-del-servidor">2 - Modificamos la configuración del servidor</h2>
+<h3 id="21-verificamos-la-memoria-total-disponible-en-el-servidor">2.1 - Verificamos la memoria total disponible en el servidor</h3>
+<p><code>free -h</code></p>
+<p><img alt="alt text" src="../image-5.png" /></p>
+<p><code>sudo nano /etc/mysql/my.cnf</code></p>
+<p><img alt="alt text" src="../image-6.png" /></p>
+<p><code>nnodb_buffer_pool_size</code></p>
+<ul>
+<li>Ajustamos este parámetro según la memoria disponible en nuestro servidor (70-80% de la memoria total), en nuestro caso hemos aplicado un 70%.</li>
+<li>Dividimos el <code>buffer pool</code> para mejorar la concurrencia.</li>
+</ul>
+<h4 id="guardamos-los-cambios-y-reiniciamos-mysql">Guardamos los cambios y reiniciamos MySQL</h4>
+<p><code>sudo systemctl restart mysql</code></p>
+<p>Comprobamos el estado</p>
+<p><code>sudo systemctl status myql</code></p>
+<p><img alt="alt text" src="../image-7.png" /></p>
+<h3 id="22-verificamos-los-cambios">2.2 - Verificamos los cambios</h3>
+<p><code>mysql&gt; "SHOW VARIABLES LIKE 'innodb_buffer_pool%';</code></p>
+<p><img alt="alt text" src="../image-8.png" /></p>
+<h2 id="3-activacion-y-configuracion-de-los-registros">3 - Activación y configuración de los registros</h2>
+<h3 id="31-activamos-el-registro-de-consultas-lentas">3.1 - Activamos el registro de consultas lentas</h3>
+<ul>
+<li><code>slow_query_log</code> : Activa el registro de consultas lentas.</li>
+<li><code>long_query_time</code> : Establece el umbral de tiempo para que una consulta se considere lenta (en segundos).</li>
+<li><code>slow_query_log_file</code> : Define la ubicación y el nombre del archivo donde se guardarán las consultas lentas.</li>
+</ul>
+<h3 id="32-activamos-el-registro-de-consultas-lentas">3.2 - Activamos el registro de consultas lentas</h3>
+<p><code>SET GLOBAL slow_query_log = 'ON';</code></p>
+<p><img alt="alt text" src="../image-9.png" /></p>
+<h3 id="33-establecemos-un-umbral-de-tiempo-de-2-segundos-para-considerar-una-consulta-como-lenta">3.3 - Establecemos un umbral de tiempo de 2 segundos para considerar una consulta como lenta</h3>
+<h4 id="previamente-editamos-este-fichero-para-establecer-el-valor-persistente-a-2-segundos">Previamente editamos este fichero para establecer el valor persistente a 2 segundos</h4>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p>Descomentamos el valor en <strong>[mysqld]</strong></p>
+<p><img alt="alt text" src="../image-13.png" /></p>
+<p>Guardamos y reiniciamos mysql</p>
+<p><code>sudo systemctl restart mysql</code></p>
+<h4 id="ya-en-mysql">Ya en mysql</h4>
+<p><code>SET GLOBAL long_query_time = 2;</code></p>
+<p><img alt="alt text" src="../image-10.png" /></p>
+<h3 id="34-activamos-el-registro-general-y-definimos-la-ruta-del-archivo-de-registro">3.4 - Activamos el registro general y definimos la ruta del archivo de registro</h3>
+<p><code>SET GLOBAL slow_query_log_file = '/var/log/mysql/slow_query.log';</code></p>
+<p><img alt="alt text" src="../image-11.png" /></p>
+<h3 id="35-verificamos">3.5 - Verificamos</h3>
+<p><code>SHOW VARIABLES LIKE 'slow_query_log'</code></p>
+<p><img alt="alt text" src="../image-12.png" /></p>
+<p><code>SHOW VARIABLES LIKE 'long_query_time';</code></p>
+<p><img alt="alt text" src="../image-14.png" /></p>
+<p><code>SHOW VARIABLES LIKE 'slow_query_log_file';</code></p>
+<p><img alt="alt text" src="../image-15.png" /></p>
+<h3 id="35-documentamos-como-activar-y-desactivar-estos-registros-en-caliente">3.5 - Documentamos cómo activar y desactivar estos registros en caliente</h3>
+<p><code>SET GLOBAL slow_query_log = ON;</code></p>
+<p><code>SET GLOBAL slow_query_log = OFF;</code></p>
+<h2 id="4-gestion-de-las-conexiones-y-de-los-hilos">4 - Gestión de las conexiones y de los hilos</h2>
+<h3 id="41-ajustamos-el-numero-maximo-de-conexiones-concurrentes-para-garantizar-un-rendimiento-optimo">4.1 - Ajustamos el número máximo de conexiones concurrentes para garantizar un rendimiento óptimo</h3>
+<p>En este ejemplo hemos configurado un ajuste de 333 y luego lo hemos comprobado:</p>
+<p><img alt="alt text" src="../image-16.png" /></p>
+<p>Si quisiermoa que este cambio fuera persistente después de un reinicio, editaríamos el fichero de configuración:</p>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
+<code>[mysqld]</code>
+<code>max_connections = xxx</code></p>
+<p>Descomentaríamos el valor, guardando el cambio y reiniciando se servicio:
+<code>sudo systemctl restart mysql</code></p>
+<h3 id="42-configuramos-el-tiempo-de-espera-de-las-conexiones-para-evitar-saturaciones-del-sistema">4.2 - Configuramos el tiempo de espera de las conexiones para evitar saturaciones del sistema</h3>
+<p>El parámetro <code>wait_timeout</code> define el tiempo en segundos que MySQL esperará antes de cerrar una conexión inactiva.</p>
+<ul>
+<li><code>wait_timeout</code> : Se aplica a las conexiones no interactivas (por ejemplo, conexiones abiertas por aplicaciones web).</li>
+<li><code>interactive_timeout</code> : Se aplica a las conexiones interactivas (por ejemplo, sesiones en la consola MySQL)</li>
+</ul>
+<h4 id="en-caliente-de-manera-temporal">En caliente, de manera temporal</h4>
+<p><code>SET GLOBAL wait_timeout = 600;</code>  -- 10 minutos</p>
+<p><img alt="alt text" src="../image-17.png" /></p>
+<p><code>SET GLOBAL interactive_timeout = 360;</code>  -- 6 minutos</p>
+<p><img alt="alt text" src="../image-18.png" /></p>
+<h4 id="permanentemente">Permanentemente</h4>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
+<code>[mysqld]</code>
+<code>wait_timeout = 300</code>
+<code>interactive_timeout = 300</code>
+<code>sudo systemctl restart mysql</code></p>
+<p><strong>Apreciación:</strong> Valores muy bajos pueden cerrar conexiones antes de que se completen las operaciones, mientras que valores muy altos pueden llevar a una saturación de conexiones inactivas.</p>
+<h3 id="43-gestionamos-el-numero-de-hilos-disponibles-para-garantizar-una-correcta-concurrencia">4.3 - Gestionamos el número de hilos disponibles para garantizar una correcta concurrencia</h3>
+<p>Ajustar el número de hilos disponibles puede mejorar la concurrencia, especialmente en sistemas con muchos núcleos.</p>
+<ul>
+<li><code>thread_cache_size</code> : Define cuántos hilos se mantendrán en caché para ser reutilizados, reduciendo la sobrecarga de creación de hilos.</li>
+</ul>
+<h4 id="en-caliente-temporalmente">En caliente, temporalmente</h4>
+<p><img alt="alt text" src="../image-19.png" /></p>
+<h4 id="de-manera-constante">De manera constante</h4>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
+<code>[mysqld]</code>
+<code>thread_cache_size = 50</code>
+<code>sudo systemctl restart mysql</code></p>
+<ul>
+<li><code>innodb_thread_concurrency</code> : Limita el número de hilos que pueden acceder simultáneamente al motor de almacenamiento InnoDB.</li>
+</ul>
+<h4 id="en-caliente-momentaneamente">En caliente, momentáneamente</h4>
+<p><img alt="alt text" src="../image-20.png" /></p>
+<h4 id="de-manera-fija">De manera fija</h4>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
+<code>[mysqld]</code>
+<code>innodb_thread_concurrency = 6</code>
+<code>sudo systemctl restart mysql</code></p>
+<h2 id="5-configuracion-de-la-memoria-cache">5 - Configuración de la memoria caché</h2>
+<h3 id="51-configura-la-memoria-cache-de-tablas-y-consultas-para-mejorar-la-eficiencia-de-las-operaciones">5.1 - Configura la memoria caché de tablas y consultas para mejorar la eficiencia de las operaciones</h3>
+<h4 id="en-caliente-de-momento">En caliente, de momento</h4>
+<p><img alt="alt text" src="../image-21.png" /></p>
+<h4 id="de-manera-estable">De manera estable</h4>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
+<code>[mysqld]</code></p>
+<p>Número máximo de descriptores de tabla abiertos
+<code>table_open_cache = 2000</code></p>
+<p>Número máximo de definiciones de tabla que se pueden mantener en caché
+<code>table_definition_cache = 1500</code></p>
+<p>Documenta los ajustes realizados y sus efectos en el rendimiento.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      edu 2024
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "header.autohide"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.aecac24b.min.js"></script>
+      
+    
+  </body>
+</html>
