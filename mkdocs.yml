@@ -1,15 +1,15 @@
 site_author: Edu
-site_name: Edu-mkdocs-Práctica 1-2 ASGBD 
+site_name: Edu-mkdocs-Práctica 1-2 ASGBD
 nav:
   - Inicio: index.md
   - PracUD1AWS:
-    - Detalle: PracUD1AWS/Documento detallado.md
+      - Detalle: PracUD1AWS/Documento detallado.md
   - PracUD2MONGO:
-    - Detalle apt-docker: 
-      - PracUD2MONGO/Documento detallado-apt.md
-      - PracUD2MONGO/Documento detallado-docker.md
+      - Detalle apt-docker:
+          - PracUD2MONGO/Documento detallado-apt.md
+          - PracUD2MONGO/Documento detallado-docker.md
   - PracUD4-Admin-Fine-Tuning-MySQL: PracUD4-Admin-Fine-Tuning-MySQL/Practica4_EduHernandez.md
-  - Detalle: 
+  - Detalle:
 docs_dir: docs
 site_dir: site
 theme:
