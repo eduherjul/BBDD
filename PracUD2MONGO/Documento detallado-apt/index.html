@@ -607,8 +607,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#paso-3-creamos-el-archivo-de-lista-para-ubuntu-2404-noble" class="md-nav__link">
-    Paso 3: Creamos el archivo de lista para Ubuntu 24.04 (Noble)
+  <a href="#paso-3-creamos-el-archivo-de-lista-para-ubuntu-2204-jammy" class="md-nav__link">
+    Paso 3: Creamos el archivo de lista para Ubuntu 22.04 (Jammy)
   </a>
   
 </li>
@@ -892,8 +892,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#paso-3-creamos-el-archivo-de-lista-para-ubuntu-2404-noble" class="md-nav__link">
-    Paso 3: Creamos el archivo de lista para Ubuntu 24.04 (Noble)
+  <a href="#paso-3-creamos-el-archivo-de-lista-para-ubuntu-2204-jammy" class="md-nav__link">
+    Paso 3: Creamos el archivo de lista para Ubuntu 22.04 (Jammy)
   </a>
   
 </li>
@@ -1070,8 +1070,8 @@
 <p><code>curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
    --dearmor</code></p>
-<h4 id="paso-3-creamos-el-archivo-de-lista-para-ubuntu-2404-noble">Paso 3: Creamos el archivo de lista para Ubuntu 24.04 (Noble)</h4>
-<p><code>echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list</code></p>
+<h4 id="paso-3-creamos-el-archivo-de-lista-para-ubuntu-2204-jammy">Paso 3: Creamos el archivo de lista para Ubuntu 22.04 (Jammy)</h4>
+<p><code>echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list</code></p>
 <h4 id="paso-4-recargamos-la-bbdd-de-paquetes">Paso 4: Recargamos la BBDD de paquetes</h4>
 <p><code>sudo apt-get update</code></p>
 <h4 id="paso-5-instalamos-la-ultima-version-estable">Paso 5: Instalamos la ultima versión estable</h4>
@@ -1118,17 +1118,17 @@
 <p><code>sudo ufw allow 27017</code></p>
 <p><img alt="alt text" src="../image-15.png" /></p>
 <h4 id="verificar-la-conectividad-remota">Verificar la conectividad remota</h4>
-<p><strong>Desde otra máquina intentaremos conectarnos al servidor de MongoDB usando 'mongosh' con la IP de la máquina donde MongoDB está instalado</strong></p>
+<p><strong>Desde otra máquina intentaremos conectarnos al servidor de MongoDB usando 'mongosh' con la IP de la máquina donde MongoDB está instalado.</strong></p>
 <p><code>mongosh --host &lt;IP del servidor&gt; --port 27017</code></p>
 <p>Si la conexión es correcta, MongoDB está configurado correctamente para conexiones remotas.</p>
-<p><strong>En nuestro host</strong></p>
+<p><strong>En nuestro host.</strong></p>
 <ul>
 <li>Comprobaremos en nuestro firewall que tenemos el puerto 27017 habilitado</li>
 <li>Instalaremos mogosdb-mongosh</li>
 </ul>
 <p><img alt="alt text" src="../image-16.png" /></p>
 <h2 id="gestion-de-cuentas-de-usuario-y-permisos">Gestión de cuentas de usuario y permisos</h2>
-<p><strong>Creamos un usuario que tenga permiso para conectarse desde la otra máquina</strong></p>
+<p><strong>Creamos un usuario que tenga permiso para conectarse desde la otra máquina.</strong></p>
 <p><code>mongosh</code></p>
 <p><code>test&gt; use admin</code></p>
 <div class="highlight"><pre><span></span><code>db.createUser({
@@ -1150,7 +1150,7 @@
 <li><u>Nos conectamos desde la MV-AWS (apt) a la MV-AWS (docker)</u></li>
 </ul>
 <p>1.-<strong>Copiamos desde nuestro host el fichero .pem en la MV-AWS (apt) para poder conectarnos posteriormente a la MV-AWS (docker)</strong></p>
-<p><code>sudo scp -i &lt;/path/to/clave.pem&gt; &lt;/path/to/clave.pem&gt; ubuntu@&lt;IP del servidor&gt;:./</code></p>
+<p><code>sudo scp -i &lt;/path/to/clave.pem&gt; &lt;/path/to/clave.pem&gt; ubuntu@&lt;IP del servidor&gt;:.</code></p>
 <p><img alt="alt text" src="../image-27.png" /></p>
 <p>2.-<strong>Nos conectamos desde la MV-AWS (apt) a la MV-AWS (docker) con el fichero .pem</strong></p>
 <p><code>sudo ssh -i &lt;clave.pem&gt; ubuntu@&lt;IP del servidor&gt;</code></p>
