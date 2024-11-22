@@ -1,15 +1,15 @@
 site_author: Edu
-site_name: Edu-mkdocs-Práctica 1-2 ASGBD
+site_name: Edu-mkdocs-Prácticas ASGBD
 nav:
   - Inicio: index.md
-  - PracUD1AWS:
+  - PracUD1:
       - Detalle: "PracUD1AWS/Documento detallado.md"
-  - PracUD2MONGO:
+  - PracUD2:
       - Detalle apt-docker:
           - "PracUD2MONGO/Documento detallado-apt.md"
           - "PracUD2MONGO/Documento detallado-docker.md"
-  - PracUD4-Admin-Fine-Tuning-MySQL: "PracUD4-Admin-Fine-Tuning-MySQL/Practica4_EduHernandez.md"
-  - PracUD5-Usuarios, permisos y roles: "PracUD4-usuarios-permisos-roles/prac4-usuarios-permisos-roles.md"
+  - PracUD4: "PracUD4-Admin-Fine-Tuning-MySQL/Practica4_EduHernandez.md"
+  - PracUD5: "PracUD4-usuarios-permisos-roles/prac4-usuarios-permisos-roles.md"
 
 
 docs_dir: docs
