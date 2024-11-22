@@ -1373,9 +1373,9 @@ Guardamos y reiniciamos mysql</p>
 <p>En este ejemplo hemos configurado un ajuste de 333 y luego lo hemos comprobado:</p>
 <p><img alt="alt text" src="../image-16.png" /></p>
 <p>Si quisiermoa que este cambio fuera persistente después de un reinicio, editaríamos el fichero de configuración:</p>
-<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
-<code>[mysqld]</code>
-<code>max_connections = xxx</code></p>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p><code>[mysqld]</code></p>
+<p><code>max_connections = xxx</code></p>
 <p>Descomentaríamos el valor, guardando el cambio y reiniciando se servicio:
 <code>sudo systemctl restart mysql</code></p>
 <h3 id="42-configuramos-el-tiempo-de-espera-de-las-conexiones-para-evitar-saturaciones-del-sistema">4.2 - Configuramos el tiempo de espera de las conexiones para evitar saturaciones del sistema</h3>
@@ -1390,11 +1390,11 @@ Guardamos y reiniciamos mysql</p>
 <p><code>SET GLOBAL interactive_timeout = 360;</code>  -- 6 minutos</p>
 <p><img alt="alt text" src="../image-18.png" /></p>
 <h4 id="permanentemente">Permanentemente</h4>
-<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
-<code>[mysqld]</code>
-<code>wait_timeout = 300</code>
-<code>interactive_timeout = 300</code>
-<code>sudo systemctl restart mysql</code></p>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p><code>[mysqld]</code></p>
+<p><code>wait_timeout = 300</code></p>
+<p><code>interactive_timeout = 300</code></p>
+<p><code>sudo systemctl restart mysql</code></p>
 <p><strong>Apreciación:</strong> Valores muy bajos pueden cerrar conexiones antes de que se completen las operaciones, mientras que valores muy altos pueden llevar a una saturación de conexiones inactivas.</p>
 <h3 id="43-gestionamos-el-numero-de-hilos-disponibles-para-garantizar-una-correcta-concurrencia">4.3 - Gestionamos el número de hilos disponibles para garantizar una correcta concurrencia</h3>
 <p>Ajustar el número de hilos disponibles puede mejorar la concurrencia, especialmente en sistemas con muchos núcleos.</p>
@@ -1404,27 +1404,27 @@ Guardamos y reiniciamos mysql</p>
 <h4 id="en-caliente-temporalmente">En caliente, temporalmente</h4>
 <p><img alt="alt text" src="../image-19.png" /></p>
 <h4 id="de-manera-constante">De manera constante</h4>
-<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
-<code>[mysqld]</code>
-<code>thread_cache_size = 50</code>
-<code>sudo systemctl restart mysql</code></p>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p><code>[mysqld]</code></p>
+<p><code>thread_cache_size = 50</code></p>
+<p><code>sudo systemctl restart mysql</code></p>
 <ul>
 <li><code>innodb_thread_concurrency</code> : Limita el número de hilos que pueden acceder simultáneamente al motor de almacenamiento InnoDB.</li>
 </ul>
 <h4 id="en-caliente-momentaneamente">En caliente, momentáneamente</h4>
 <p><img alt="alt text" src="../image-20.png" /></p>
 <h4 id="de-manera-fija">De manera fija</h4>
-<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
-<code>[mysqld]</code>
-<code>innodb_thread_concurrency = 6</code>
-<code>sudo systemctl restart mysql</code></p>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p><code>[mysqld]</code></p>
+<p><code>innodb_thread_concurrency = 6</code></p>
+<p><code>sudo systemctl restart mysql</code></p>
 <h2 id="5-configuracion-de-la-memoria-cache">5 - Configuración de la memoria caché</h2>
 <h3 id="51-configura-la-memoria-cache-de-tablas-y-consultas-para-mejorar-la-eficiencia-de-las-operaciones">5.1 - Configura la memoria caché de tablas y consultas para mejorar la eficiencia de las operaciones</h3>
 <h4 id="en-caliente-de-momento">En caliente, de momento</h4>
 <p><img alt="alt text" src="../image-21.png" /></p>
 <h4 id="de-manera-estable">De manera estable</h4>
-<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code>
-<code>[mysqld]</code></p>
+<p><code>sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p><code>[mysqld]</code></p>
 <p>Número máximo de descriptores de tabla abiertos
 <code>table_open_cache = 2000</code></p>
 <p>Número máximo de definiciones de tabla que se pueden mantener en caché

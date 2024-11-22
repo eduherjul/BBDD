@@ -36,9 +36,9 @@ Versión más adecuada para mi entorno como estudiante es la MongoDB Community E
    sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
    --dearmor`
 
-#### Paso 3: Creamos el archivo de lista para Ubuntu 24.04 (Noble)
+#### Paso 3: Creamos el archivo de lista para Ubuntu 22.04 (Jammy)
 
-`echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list`
+`echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list`
 
 #### Paso 4: Recargamos la BBDD de paquetes
 
@@ -121,14 +121,13 @@ net:
 
 #### Verificar la conectividad remota
 
-**Desde otra máquina intentaremos conectarnos al servidor de MongoDB usando 'mongosh' con la IP de la máquina donde MongoDB está instalado**
+**Desde otra máquina intentaremos conectarnos al servidor de MongoDB usando 'mongosh' con la IP de la máquina donde MongoDB está instalado.**
 
 `mongosh --host <IP del servidor> --port 27017`
 
-
 Si la conexión es correcta, MongoDB está configurado correctamente para conexiones remotas.
 
-**En nuestro host**
+**En nuestro host.**
 
 - Comprobaremos en nuestro firewall que tenemos el puerto 27017 habilitado
 - Instalaremos mogosdb-mongosh
@@ -137,7 +136,7 @@ Si la conexión es correcta, MongoDB está configurado correctamente para conexi
 
 ## Gestión de cuentas de usuario y permisos
 
-**Creamos un usuario que tenga permiso para conectarse desde la otra máquina**
+**Creamos un usuario que tenga permiso para conectarse desde la otra máquina.**
 
 `mongosh`
 
@@ -171,7 +170,7 @@ Y hay que tener en cuenta de tener de cambiar el valor a `0.0.0.0` para permitir
 
   1.-**Copiamos desde nuestro host el fichero .pem en la MV-AWS (apt) para poder conectarnos posteriormente a la MV-AWS (docker)**
 
-  `sudo scp -i </path/to/clave.pem> </path/to/clave.pem> ubuntu@<IP del servidor>:./`
+  `sudo scp -i </path/to/clave.pem> </path/to/clave.pem> ubuntu@<IP del servidor>:.`
 
   ![alt text](image-27.png)
 

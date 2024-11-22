@@ -5,6 +5,14 @@
 ![alt text](image.png)
 ![alt text](image-1.png)
 
+## Instalamos Mysql
+
+`sudo apt update`
+
+`sudo apt dist-upgrade -y`
+
+`sudo apt install mysql-server -y`
+
 ### Configuramos contraseña para el usuario root:
 
 `sudo su`
