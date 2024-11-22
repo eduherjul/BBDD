@@ -9,6 +9,8 @@ nav:
           - "PracUD2MONGO/Documento detallado-apt.md"
           - "PracUD2MONGO/Documento detallado-docker.md"
   - PracUD4-Admin-Fine-Tuning-MySQL: "PracUD4-Admin-Fine-Tuning-MySQL/Practica4_EduHernandez.md"
+  - PracUD5-Usuarios, permisos y roles: "PracUD4-usuarios-permisos-roles/prac4-usuarios-permisos-roles.md"
+
 
 docs_dir: docs
 site_dir: site
