@@ -41,6 +41,7 @@ Desde nuestro terminal de la MV de AWS donde tenemos instalado mysql:
 La base de datos de empleados es compatible con varios motores de almacenamiento diferentes, con el motor InnoDB habilitado de forma predeterminada. Editamos el `employees.sql` archivo y ajustaremos los comentarios para elegir un motor de almacenamiento diferente:
 
 `cd test_db`
+
 `sudo nano employes.sql`
 
 ![alt text](image-5.png)
@@ -73,8 +74,11 @@ Puede validar los datos del empleado mediante dos métodos `md5` y `sha`. Se pro
 **1.- Creamos un usuario que tenga todos los permisos sobre esta base de datos y además tenga permiso para otorgar permiso a otros usuarios. Utiliza este usuario para realizar los puntos siguientes.**
 
 `sudo mysql -u root`
+
 `CREATE USER 'Sauron'@'localhost' IDENTIFIED BY 'Root_pass1';`
+
 `GRANT ALL PRIVILEGES ON *.* TO 'Sauron'@'localhost' WITH GRANT OPTION;`
+
 `GRANT CREATE USER ON *.* TO 'Sauron'@'localhost';`
 
 ### Comprobamos
@@ -90,13 +94,17 @@ Puede validar los datos del empleado mediante dos métodos `md5` y `sha`. Se pro
 **2.- Creamos dos usuarios que tenga acceso de lectura a todas las tablas de la base de datos. Uno podrá acceder desde cualquier punto y el segundo solo podrá acceder desde la IP del cliente del laboratorio.**
 
 `CREATE USER 'totread'@'%' IDENTIFIED BY 'totread';`
+
 `GRANT SELECT ON employees.* TO 'totread'@'%';`
+
 `CREATE USER 'ipread'@'98.85.180.194' IDENTIFIED BY 'ipread';`
+
 `GRANT SELECT ON employees.* TO 'ipread'@'98.85.180.194';`
 
 **Verificamos los privilegios de los usuarios:**
 
 `SHOW GRANTS FOR 'totread'@'%';`
+
 `SHOW GRANTS FOR 'ipread'@'98.85.180.194';`
 
 ![alt text](image-11.png)
@@ -104,13 +112,17 @@ Puede validar los datos del empleado mediante dos métodos `md5` y `sha`. Se pro
 **3.- Creamos dos usuario que tenga acceso de lectura/escrituta a todas las tablas de la base de datos. Igual que antes uno solo accederá desde el cliente del laboratorio y el segundo desde cualquier punto.**
 
 `create user 'rwtot'@'%' identified by 'rwtot';`
+
 `GRANT SELECT, INSERT, UPDATE, DELETE ON employees.* TO 'rwtot'@'%';`
+
 `create user 'rwip'@'98.85.180.194' identified by 'rwip';`
+
 `GRANT SELECT, INSERT, UPDATE, DELETE ON employees.* TO 'rwip'@'98.85.180.194';`
 
 **Verificamos los privilegios de los usuarios.**
 
 `SHOW GRANTS FOR 'rwtot'@'%';`
+
 `SHOW GRANTS FOR 'rwip'@'98.85.180.194';`
 
 ![alt text](image-15.png)
@@ -126,8 +138,11 @@ Puede validar los datos del empleado mediante dos métodos `md5` y `sha`. Se pro
 Desde el servidor-laboratorio nos conectamos al servidor de la BBDD employees, seleccionamos esta y dentro 5 empleados e intentamos borrar uno.
 
 `mysql -u totread -p -h 98.85.147.99 -P 3306`
+
 `use employees;`
+
 `select * from employees limit 5;`
+
 `delete from employees where emp_no = 10001;`
 
 ![alt text](image-16.png)
@@ -151,10 +166,15 @@ Vamos a conectarnos con el usuario que si tiene permisos de lectura/escritura:
 **5.- Eliminamos las cuentas creadas en los puntos 2 y 3.**
 
 `mysql -u Sauron -p`
+
 `drop user 'totread'@'%';`
+
 `drop user 'rwtot'@'%';`
+
 `drop user 'ipread'@'98.85.180.194';`
+
 `drop user 'rwip'@'98.85.180.194';`
+
 `select user, host from mysql.user;`
 
 ![alt text](image-19.png)
@@ -165,6 +185,7 @@ Vamos a conectarnos con el usuario que si tiene permisos de lectura/escritura:
 base de datos.**
 
 `create role leo_rol;`
+
 `grant select on employees.* to leo_rol;`
 
 ![alt text](image-20.png)
@@ -172,6 +193,7 @@ base de datos.**
 **2- .Creamos un rol que otorgue permisos de escritura sobre todos las tablas de la base de datos.**
 
 `create role write_rol;`
+
 `grant insert, update, delete on employees.* to write_rol;`
 
 ![alt text](image-21.png)
@@ -179,6 +201,7 @@ base de datos.**
 **3.- Creamos un usuario y le asignamos el rol de lectura.**
 
 `create user 'eduleo'@'%' identified by 'eduleo';`
+
 `grant leo_rol to 'eduleo'@'%';`
 
 ![alt text](image-22.png)
@@ -187,6 +210,7 @@ base de datos.**
 **4.- Creamos un usuario y le asignamos el rol de escritura.**
 
 `create user 'escribano'@'%' identified by 'escribano';`
+
 `grant write_rol to 'escribano'@'%';`
 
 ![alt text](image-24.png)
@@ -194,7 +218,9 @@ base de datos.**
 **5.- Creamos un tercer usuario y le asignamos los dos roles.**
 
 `create user 'dosroles'@'%' identified by 'dosroles';`
+
 `grant leo_rol to 'dosroles'@'%';`
+
 `grant write_rol to 'dosroles'@'%';`
 
 ![alt text](image-25.png)
@@ -228,7 +254,9 @@ El rol no esté activo para nuestra sesión actual del usuario. Lo activamos man
 Seleccionamos nuestra BBDD employees y listamos 5 empleados y al intentar borrar uno de ellos nos lo va a denegar ya que el usuario `eduleo` solo tiene permiso de lectura.
 
 `use employees;`
+
 `select * from employees limit 5;`
+
 `delete from employees where emp_no = 10002;`
 
 ![alt text](image-29.png)
@@ -244,6 +272,7 @@ El rol no esté activo para nuestra sesión actual del usuario. Lo activamos    
 Seleccionamos nuestra BBDD employees e intentamos listar 5 empleados, pero nos lo va a denegar ya que el usuario `escribano` solo tiene asignados el rol de escritura y no de lectura, por lo que no podemos acceder.
 
 `use employees;`
+
 `select * from employees limit 5;`
 
 ![alt text](image-30.png)
@@ -257,6 +286,7 @@ Seleccionamos nuestra BBDD employees e intentamos listar 5 empleados, pero nos l
 Los roles no estarán activos para nuestra sesión actual del usuario. Los activamos manualmente:
 
 `set role 'leo_rol';`
+
 `set role 'write_rol';`
 
 ![alt text](image-31.png)
@@ -272,7 +302,9 @@ Seleccionamos nuestra BBDD employees e intentamos listar 5 empleados, pero nos l
 Creamos el nuevo rol `readwr-rol`, le damos los permisos de lectura/escritura en un solo comando y se lo asignamos al usuario `dosroles`:
 
 `create role readwr_rol;`
+
 `grant select, insert, update, delete on employees.* to readwr_rol;`
+
 `grant readwr_rol to 'dosroles'@'%';`
 
 ![alt text](image-32.png)
@@ -292,8 +324,11 @@ Como el rol no estará activo para nuestra sesión actual del usuario. Lo activa
 Seleccionamos nuestra BBDD employees y listamos 5 empleados, y vemos que podemos borrar un usuario ya que además de poder acceder con el rol que contiene `select` también podemos borrar ya que el mismo rol contiene `delete`.
 
 `use employess;`
+
 `select * from employees limit 5;`
+
 `delete from employees where emp_no = 10002;`
+
 `select * from employees limit 5;`
 
 ![alt text](image-33.png)

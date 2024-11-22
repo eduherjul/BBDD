@@ -169,7 +169,9 @@ En este ejemplo hemos configurado un ajuste de 333 y luego lo hemos comprobado:
 Si quisiermoa que este cambio fuera persistente después de un reinicio, editaríamos el fichero de configuración:
 
 `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
+
 `[mysqld]`
+
 `max_connections = xxx`
 
 Descomentaríamos el valor, guardando el cambio y reiniciando se servicio:
@@ -195,9 +197,13 @@ El parámetro `wait_timeout` define el tiempo en segundos que MySQL esperará an
 #### Permanentemente
 
 `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
+
 `[mysqld]`
+
 `wait_timeout = 300`
+
 `interactive_timeout = 300`
+
 `sudo systemctl restart mysql`
 
 **Apreciación:** Valores muy bajos pueden cerrar conexiones antes de que se completen las operaciones, mientras que valores muy altos pueden llevar a una saturación de conexiones inactivas.
@@ -215,8 +221,11 @@ Ajustar el número de hilos disponibles puede mejorar la concurrencia, especialm
 #### De manera constante
 
 `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
+
 `[mysqld]`
+
 `thread_cache_size = 50`
+
 `sudo systemctl restart mysql`
 
 - `innodb_thread_concurrency` : Limita el número de hilos que pueden acceder simultáneamente al motor de almacenamiento InnoDB.
@@ -228,8 +237,11 @@ Ajustar el número de hilos disponibles puede mejorar la concurrencia, especialm
 #### De manera fija
 
 `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
+
 `[mysqld]`
+
 `innodb_thread_concurrency = 6`
+
 `sudo systemctl restart mysql`
 
 ## 5 - Configuración de la memoria caché
@@ -243,6 +255,7 @@ Ajustar el número de hilos disponibles puede mejorar la concurrencia, especialm
 #### De manera estable
 
 `sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
+
 `[mysqld]`
 
 Número máximo de descriptores de tabla abiertos
@@ -250,9 +263,5 @@ Número máximo de descriptores de tabla abiertos
 
 Número máximo de definiciones de tabla que se pueden mantener en caché
 `table_definition_cache = 1500`
-
-
-
-
 
 Documenta los ajustes realizados y sus efectos en el rendimiento.
