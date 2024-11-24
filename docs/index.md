@@ -10,4 +10,4 @@ nav:
 * Práctica 2.2: MongoDB   AWS (docker)
 * Práctica   4: Administración y Fine-Tuning del Servidor MySQL
 * Práctica UD5 T4: Usuarios, permisos y roles
-* Examen 22-11-24: Tunning, permisos, docker mongo
+* Examen 22-11-24: Tunning, permisos, docker y mongo
