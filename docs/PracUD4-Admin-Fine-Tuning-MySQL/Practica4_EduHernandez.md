@@ -77,7 +77,7 @@ Probaremos la conexión desde otra máquina usando el cliente MySQL creado:
 
 ![alt text](image-6.png)
 
-`nnodb_buffer_pool_size`
+`innodb_buffer_pool_size`
 
 - Ajustamos este parámetro según la memoria disponible en nuestro servidor (70-80% de la memoria total), en nuestro caso hemos aplicado un 70%.
 - Dividimos el `buffer pool` para mejorar la concurrencia.

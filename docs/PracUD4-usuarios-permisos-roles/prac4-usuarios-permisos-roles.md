@@ -51,7 +51,7 @@ Pero al final no guardamos esta configuración solo la vemos para saber como cam
 
 ![alt text](image-6.png)
 
-Para importar los datos a su instancia de MySQL, cargaremos los datos a través de la herramienta de línea de comandos mysql:
+Para importar los datos a nuestra instancia de MySQL, cargaremos los datos a través de la herramienta de línea de comandos mysql:
 
 `sudo mysql -t < employees.sql`
 
