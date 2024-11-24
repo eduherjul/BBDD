@@ -10,6 +10,7 @@ nav:
           - "PracUD2MONGO/Documento detallado-docker.md"
   - PracUD4: "PracUD4-Admin-Fine-Tuning-MySQL/Practica4_EduHernandez.md"
   - PracUD5: "PracUD4-usuarios-permisos-roles/prac4-usuarios-permisos-roles.md"
+  - Exámen 22-11-24: "Examen-22-11-24/examen-22-11-24.md"
 
 
 docs_dir: docs
