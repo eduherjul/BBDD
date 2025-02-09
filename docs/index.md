@@ -11,3 +11,4 @@ nav:
 * Práctica   4: Administración y Fine-Tuning del Servidor MySQL
 * Práctica UD5 T4: Usuarios, permisos y roles
 * Examen 22-11-24: Tunning, permisos, docker y mongo
+* Práctica enunciat: Backups_replica
