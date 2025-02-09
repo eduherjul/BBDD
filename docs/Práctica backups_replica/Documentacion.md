@@ -88,7 +88,9 @@ password=123
 ##### Creamos los directorios temporales `home` en la Máquina 1 (master) para almacenar las copias
 
 `mkdir /home/yo/bkptattoo`
+
 `mkdir /home/yo/bkptattoo/incrementales`
+
 `mkdir /home/yo/bkptattoo/completa`
 
 ![alt text](image-17.png)
@@ -253,6 +255,7 @@ password=123
 **En la Máquina 2, restauramos la estructura en MySQL, creando la BBDD previamente.**
 
 `sudo mysql -e "CREATE DATABASE tattoo;"`
+
 `sudo mysql tattoo < /bkptattoo/estructura_tattoo.sql`
 
 ![alt text](image-34.png)
@@ -304,11 +307,14 @@ password=123
 #### 3.2. Añadimos una tabla nueva llamada caja en la "máquina 2"
 
 `sudo mysql`
+
 `CREATE TABLE caja (id INT AUTO_INCREMENT PRIMARY KEY, cantidad INT NOT NULL);`
 
 ![alt text](image-37.png)
 
 ##### Verificamos la creación de la tabla
+
+`show tables;`
 
 ![alt text](image-38.png)
 
@@ -316,7 +322,7 @@ password=123
 
 #### 4.1 Borramos accidentalmente la tabla tattoo en la "máquina 2"
 
-`mysql -u usuario -p -e "DROP TABLE tattoo.tatuajes;"`
+`sudo mysql -e "DROP TABLE tattoo.tattoo;"`
 
 ![alt text](image-39.png)
 
@@ -324,7 +330,7 @@ password=123
 
 ![alt text](image-40.png)
 
-#### 4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla
+##### 4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla
 
 ##### 4.2.1.-En la Máquina 2 restauraremos la estructura para que nos de error por la falta de la tabla tattoo que hemos borrado
 
@@ -383,7 +389,9 @@ binlog_do_db=tattoo
 ### 5.3 Crearemos en la "máquina 1"un usuario replicador
 
 `sudo mysql`
+
 `ALTER USER 'replicador'@'%' IDENTIFIED WITH mysql_native_password BY '123';`
+
 `GRANT REPLICATION SLAVE ON *.* TO 'replicador'@'%';`
 
 ![alt text](image-25.png)
@@ -437,6 +445,7 @@ START SLAVE;
 **Si todo está bien, deberemos ver:**
 
 `Slave_IO_Running: Yes`
+
 `Slave_SQL_Running: Yes`
 
 ![alt text](image-50.png)
