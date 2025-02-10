@@ -1020,18 +1020,12 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#42-recuperaremos-la-base-de-datos-desde-la-operacion-previa-al-borrado-de-la-tabla" class="md-nav__link">
     4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla
   </a>
   
-    <nav class="md-nav" aria-label="4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#421-en-la-maquina-2-restauraremos-la-estructura-para-que-nos-de-error-por-la-falta-de-la-tabla-tattoo-que-hemos-borrado" class="md-nav__link">
@@ -1477,18 +1471,12 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#42-recuperaremos-la-base-de-datos-desde-la-operacion-previa-al-borrado-de-la-tabla" class="md-nav__link">
     4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla
   </a>
   
-    <nav class="md-nav" aria-label="4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#421-en-la-maquina-2-restauraremos-la-estructura-para-que-nos-de-error-por-la-falta-de-la-tabla-tattoo-que-hemos-borrado" class="md-nav__link">
@@ -1649,9 +1637,9 @@ password=123
 <p><code>ssh-copy-id yo@192.168.122.22</code></p>
 <p><img alt="alt text" src="../image-14.png" /></p>
 <h5 id="creamos-los-directorios-temporales-home-en-la-maquina-1-master-para-almacenar-las-copias">Creamos los directorios temporales <code>home</code> en la Máquina 1 (master) para almacenar las copias</h5>
-<p><code>mkdir /home/yo/bkptattoo</code>
-<code>mkdir /home/yo/bkptattoo/incrementales</code>
-<code>mkdir /home/yo/bkptattoo/completa</code></p>
+<p><code>mkdir /home/yo/bkptattoo</code></p>
+<p><code>mkdir /home/yo/bkptattoo/incrementales</code></p>
+<p><code>mkdir /home/yo/bkptattoo/completa</code></p>
 <p><img alt="alt text" src="../image-17.png" /></p>
 <p><img alt="alt text" src="../image-22.png" /></p>
 <h3 id="maquina-2-server-almacenamiento-restauracion">Máquina 2-Server-almacenamiento-restauración</h3>
@@ -1736,8 +1724,8 @@ password=123
 <h4 id="21-verificamos-en-maquina-2">2.1. Verificamos en máquina 2</h4>
 <p><img alt="alt text" src="../image-33.png" /></p>
 <p><strong>En la Máquina 2, restauramos la estructura en MySQL, creando la BBDD previamente.</strong></p>
-<p><code>sudo mysql -e "CREATE DATABASE tattoo;"</code>
-<code>sudo mysql tattoo &lt; /bkptattoo/estructura_tattoo.sql</code></p>
+<p><code>sudo mysql -e "CREATE DATABASE tattoo;"</code></p>
+<p><code>sudo mysql tattoo &lt; /bkptattoo/estructura_tattoo.sql</code></p>
 <p><img alt="alt text" src="../image-34.png" /></p>
 <h4 id="22-verificamos-que-la-estructura-se-importo-correctamente">2.2. Verificamos que la estructura se importó correctamente</h4>
 <p><code>sudo mysql</code>
@@ -1763,18 +1751,19 @@ password=123
 <p><strong>Verificamos la transferencia en la máquina 2.</strong></p>
 <p><img alt="alt text" src="../image-43.png" /></p>
 <h4 id="32-anadimos-una-tabla-nueva-llamada-caja-en-la-maquina-2">3.2. Añadimos una tabla nueva llamada caja en la "máquina 2"</h4>
-<p><code>sudo mysql</code>
-<code>CREATE TABLE caja (id INT AUTO_INCREMENT PRIMARY KEY, cantidad INT NOT NULL);</code></p>
+<p><code>sudo mysql</code></p>
+<p><code>CREATE TABLE caja (id INT AUTO_INCREMENT PRIMARY KEY, cantidad INT NOT NULL);</code></p>
 <p><img alt="alt text" src="../image-37.png" /></p>
 <h5 id="verificamos-la-creacion-de-la-tabla">Verificamos la creación de la tabla</h5>
+<p><code>show tables;</code></p>
 <p><img alt="alt text" src="../image-38.png" /></p>
 <h3 id="4-recuperamos-desde-un-punto-concreto">4. Recuperamos desde un punto concreto</h3>
 <h4 id="41-borramos-accidentalmente-la-tabla-tattoo-en-la-maquina-2">4.1 Borramos accidentalmente la tabla tattoo en la "máquina 2"</h4>
-<p><code>mysql -u usuario -p -e "DROP TABLE tattoo.tatuajes;"</code></p>
+<p><code>sudo mysql -e "DROP TABLE tattoo.tattoo;"</code></p>
 <p><img alt="alt text" src="../image-39.png" /></p>
 <h5 id="verificamos-la-eliminacion-de-la-tabla-tattoo">Verificamos la eliminación de la tabla <code>tattoo</code></h5>
 <p><img alt="alt text" src="../image-40.png" /></p>
-<h4 id="42-recuperaremos-la-base-de-datos-desde-la-operacion-previa-al-borrado-de-la-tabla">4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla</h4>
+<h5 id="42-recuperaremos-la-base-de-datos-desde-la-operacion-previa-al-borrado-de-la-tabla">4.2. Recuperaremos la base de datos desde la operación previa al borrado de la tabla</h5>
 <h5 id="421-en-la-maquina-2-restauraremos-la-estructura-para-que-nos-de-error-por-la-falta-de-la-tabla-tattoo-que-hemos-borrado">4.2.1.-En la Máquina 2 restauraremos la estructura para que nos de error por la falta de la tabla tattoo que hemos borrado</h5>
 <p><code>sudo mysql tattoo &lt; bkptattoo/estructura_tattoo.sql</code></p>
 <p><img alt="alt text" src="../image-44.png" /></p>
@@ -1806,9 +1795,9 @@ sudo systemctl start mysql
 <p><strong>Reiniciamos.</strong></p>
 <p><code>sudo systemctl restar mysql.service</code></p>
 <h3 id="53-crearemos-en-la-maquina-1un-usuario-replicador">5.3 Crearemos en la "máquina 1"un usuario replicador</h3>
-<p><code>sudo mysql</code>
-<code>ALTER USER 'replicador'@'%' IDENTIFIED WITH mysql_native_password BY '123';</code>
-<code>GRANT REPLICATION SLAVE ON *.* TO 'replicador'@'%';</code></p>
+<p><code>sudo mysql</code></p>
+<p><code>ALTER USER 'replicador'@'%' IDENTIFIED WITH mysql_native_password BY '123';</code></p>
+<p><code>GRANT REPLICATION SLAVE ON *.* TO 'replicador'@'%';</code></p>
 <p><img alt="alt text" src="../image-25.png" /></p>
 <p><strong>Comprobamos.</strong></p>
 <p><code>SELECT user, host, plugin FROM mysql.user WHERE user='replicador'</code></p>
@@ -1838,8 +1827,8 @@ sudo systemctl start mysql
 <p><strong>Verificamos el estado de la replicación.</strong></p>
 <p><code>SHOW SLAVE STATUS\G</code></p>
 <p><strong>Si todo está bien, deberemos ver:</strong></p>
-<p><code>Slave_IO_Running: Yes</code>
-<code>Slave_SQL_Running: Yes</code></p>
+<p><code>Slave_IO_Running: Yes</code></p>
+<p><code>Slave_SQL_Running: Yes</code></p>
 <p><img alt="alt text" src="../image-50.png" /></p>
 <h3 id="con-esto-la-replicacion-estara-funcionando-correctamente">Con esto, la replicación estará funcionando correctamente</h3>
 

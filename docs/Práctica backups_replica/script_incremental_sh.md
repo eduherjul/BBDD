@@ -13,7 +13,7 @@ DESTINO="$REMOTO_USER@$REMOTE_HOST:$REMOTE_DIR"
 RSYNC_OPTS="-avz" # Opciones para rsync
 
 # Backup incremental (usando .my.cnf para las credenciales)
-if ! sudo mysqldump --single-transaction --quick --flush-logs tattoo | gzip >"$BACKUP_FILE"; then
+if ! mysqldump --single-transaction --quick --flush-logs tattoo | gzip >"$BACKUP_FILE"; then
   echo "Error: Fallo al crear el backup."
   exit 1
 fi
