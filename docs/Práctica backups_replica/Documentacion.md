@@ -381,17 +381,7 @@ sudo systemctl start mysql
 
 ### 5.1 Configuraremos la "máquina 3" como esclavo de la "máquina 1"
 
-#### Editaremos el archivo de configuración `/etc/mysql/mysql.conf.d/mysqld.cnf`
-
-`sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf`
-
-![alt text](image-1.png)
-
-**Reiniciamos.**
-
-`sudo systemctl restar mysql.service`
-
-#### 5.2 En la "máquina 1" (`servidor maestro`), haremos los cambios necesarios en el fichero de configuración para que el servidor principal actúe como maestro (master)
+#### En la "máquina 1" (`servidor maestro`), haremos los cambios necesarios en el fichero de configuración para que el servidor principal actúe como maestro (master)
 
 **Editaremos el archivo de configuración `/etc/mysql/mysql.conf.d/mysqld.cnf` y añadiremos:**
 
@@ -410,7 +400,7 @@ binlog_do_db=tattoo
 
 `sudo systemctl restar mysql.service`
 
-### 5.3 Crearemos en la "máquina 1"un usuario replicador
+### 5.2 Crearemos en la "máquina 1" un usuario replicador
 
 ```sql
 sudo mysql
@@ -479,7 +469,7 @@ password=456
 
 **Cuando MySQL detecta que la conexión se perdió, intenta reconectarse automáticamente. Después de la reconexión, UNLOCK TABLES se ejecuta sin problemas.**
 
-### 5.4 Copiaremos los datos de la BBDD (maestro) en el servidor réplica y comenzaremos a configurar la BBDD esclava
+### 5.3 Copiaremos los datos de la BBDD (maestro) en el servidor réplica y comenzaremos a configurar la BBDD esclava
 
 **Creamos la nueva BBDD que va a replicar del maestro (luego salimos):**
 
@@ -499,7 +489,7 @@ password=456
 
 ![alt text](image-62.png)
 
-**#### Restauramos la BBDD tattoo en el slave desde el archivo SQL.**
+#### Restauramos la BBDD `tattoo` en el slave desde el archivo SQL
 
 `sudo mysql tattoo < tattoo.sql`
 
@@ -516,7 +506,7 @@ show tables;
 
 ![alt text](image-64.png)
 
-### 5.5 Ahora configuraremos el Servidor Replica (slave)
+### 5.4 Ahora configuraremos el Servidor Replica (slave)
 
 **Al igual que en el otro servidor (maestro), hay que configurar el servidor réplica para que conecte con el principal de la misma manera que lo hicimos con el maestro.**
 
@@ -536,7 +526,7 @@ binlog_do_db=tattoo
 
 `sudo systemctl restar mysql.service`
 
-### 5.6 Inicializamos la replica
+### 5.5 Inicializamos la replica
 
 **Poner en marcha la réplica. A partir de este momento cualquier cambio realizado en la BBDD en el servidor `maestro` se debe reflejar automáticamente en la `réplica`, por lo que habilitamos la replicación desde el shell de MySQL.**
 
@@ -573,7 +563,7 @@ CHANGE MASTER TO
 
 ![alt text](image-66.png)
 
-#### 5.7 Vamos a hacer una prueba para comprobar que la replicación se está desarrollando correctamente
+#### 5.6 Vamos a hacer una prueba para comprobar que la replicación se está desarrollando correctamente
 
 **Insertaremos un nuevo cliente en la tabla `client` de nuestra BBDD `tattoo`.**
 
