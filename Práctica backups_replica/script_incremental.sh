@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-BACKUP_DIR="/home/yo/bkptattoo/incremental/"
+BACKUP_DIR="/home/yo/bkptattoo/incremental"
 TIMESTAMP=$(date +'%Y-%m-%d_%H:%M:%S')
 BACKUP_FILE="$BACKUP_DIR/tattoo_incremental_$TIMESTAMP.sql.gz"
 MAX_SIZE=1048576 # Tamaño máximo de 1 MB

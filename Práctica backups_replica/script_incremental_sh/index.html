@@ -713,7 +713,7 @@
 <span class="nv">RSYNC_OPTS</span><span class="o">=</span><span class="s2">&quot;-avz&quot;</span><span class="w"> </span><span class="c1"># Opciones para rsync</span>
 
 <span class="c1"># Backup incremental (usando .my.cnf para las credenciales)</span>
-<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>sudo<span class="w"> </span>mysqldump<span class="w"> </span>--single-transaction<span class="w"> </span>--quick<span class="w"> </span>--flush-logs<span class="w"> </span>tattoo<span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>&gt;<span class="s2">&quot;</span><span class="nv">$BACKUP_FILE</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>mysqldump<span class="w"> </span>--single-transaction<span class="w"> </span>--quick<span class="w"> </span>--flush-logs<span class="w"> </span>tattoo<span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>&gt;<span class="s2">&quot;</span><span class="nv">$BACKUP_FILE</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Fallo al crear el backup.&quot;</span>
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
